@@ -68,13 +68,6 @@ public class FrontPageController {
         }
     }
 
-
-    private void setUpGameMap(){
-
-       //this.game.getRoot().
-
-    }
-
     private void openGameScene(ActionEvent actionEvent) throws IOException {
 
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
@@ -83,8 +76,6 @@ public class FrontPageController {
 
         primaryStage.setScene(game);
 
-
-     //   primaryStage.show();
     }
 
     public void loadProgress(){

@@ -13,7 +13,7 @@ public class Controller {
         return instance;
     }
 
-    private static List<Player> players = new ArrayList<>();
+    private static List<Player> players ;
 
     private static int phase = 1;
 

@@ -68,8 +68,7 @@ public class LoadUtil {
 
             List<Country> adjacent = c.getAdjacentCountry();
 
-            adjacent.forEach(a-> {
-                if(!a.getAdjacentCountry().contains(c))
+            adjacent.forEach(a-> { if(!a.getAdjacentCountry().contains(c))
 
                     throw new IllegalArgumentException("Illegal adjacent country "+c.getName()+" and "+ a.getName());
             });
@@ -90,7 +89,7 @@ public class LoadUtil {
 
             s = s.trim();
 
-            if (s.equals("[GameMap]") || s.equals("[Territories]") || s.equals("[Continents]")) {
+            if (s.equals("[Map]") || s.equals("[Territories]") || s.equals("[Continents]")) {
 
                 label = s;
 
