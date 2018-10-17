@@ -7,6 +7,10 @@ import javafx.scene.text.Text;
 import sample.Controller;
 import sample.gamePage.status.StatusPhase;
 import sample.model.Player;
+/**
+ * This class represents the first phase of the game
+ * It updates current status
+ */
 
 public class PhaseOne implements StatusPhase{
 
@@ -31,7 +35,10 @@ public class PhaseOne implements StatusPhase{
     @FXML
     private Text log;
 
-
+    /**
+	 * To update phrase one game which includes current player, territory,continent
+     * stages,and gained army number 
+	 */
     public void update(){
 
         Player currentPlayerPlayer = Controller.getCurrentPlayer();
@@ -49,6 +56,11 @@ public class PhaseOne implements StatusPhase{
         army.setText(army.getText()+ currentPlayerPlayer.getArmy());
 
     }
+    /**
+	 * @override function
+     * This method is to get current pane
+     * @return pane
+	 */
 
     @Override
     public AnchorPane getPane() {
