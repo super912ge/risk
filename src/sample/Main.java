@@ -8,6 +8,10 @@ import javafx.stage.Stage;
 import sample.frontPage.FrontPageController;
 import sample.gamePage.GamePageController;
 
+/**
+ * The main entrance of the application
+ *
+ */
 public class Main extends Application {
 
     private Stage stage;
@@ -90,7 +94,10 @@ public class Main extends Application {
     public void setGamePageController(GamePageController gamePageController) {
         this.gamePageController = gamePageController;
     }
-
+	
+    /**
+	 * Launch the application.
+	 */
     public static void main(String[] args) {
         launch(args);
     }
