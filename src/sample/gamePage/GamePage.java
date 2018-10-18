@@ -153,16 +153,22 @@ public class GamePage {
         }
     }
 
-	public void start () {
-
-	}
-
 	public void updatePhaseStatus(){
 
         phaseStatus = phaseController.getPhase();
 
+        phaseStatus.init();
+
+        statusPane.getChildren().clear();
+
+        statusPane.getChildren().addAll(playerInfo,phaseStatus.getPane());
+
+    }
+
+    public void playerPhase(){
+
         phaseStatus.update();
 
-        statusPane.getChildren().set(1,phaseStatus.getPane());
+        statusPane.getChildren().set(1, phaseStatus.getPane());
     }
 }

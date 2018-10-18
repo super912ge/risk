@@ -1,8 +1,11 @@
 package sample.frontPage.gameSetup;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -20,6 +23,9 @@ public class GameSetup {
     @FXML
     private AnchorPane setupPane;
 
+    @FXML
+    private Button confirm;
+
 
     private NumberTextField numberTextField;
 
@@ -29,7 +35,15 @@ public class GameSetup {
     @FXML
     public void initialize(){
 
-        numberTextField = new NumberTextField();
+        try {
+            numberTextField = new NumberTextField();
+
+            numberTextField.setRange(3,6);
+
+        } catch (IllegalArgumentException e) {
+
+            this.confirm.setDisable(true);
+        }
 
         Label label = new Label("Number of players: ");
 
@@ -47,28 +61,42 @@ public class GameSetup {
     @FXML
     public void confirm(ActionEvent event){
 
-        GameStatus.getInstance ().reset();
 
-        for(int i =0; i< numberTextField.getNumber(); i++) {
+        if (numberTextField.isOutRange()) {
 
-            int n = i;
+            Alert alert = new Alert(Alert.AlertType.ERROR);
 
-            Player player = new Player(i+1,initialArmy[numberTextField.getNumber()-3]);
+            alert.setContentText( numberTextField.getNumber() +" is invalid, please enter number between "+numberTextField.getRange());
 
-        	while ( n < GameMap.getInstance ().getTerritories ().size ()){
-
-        		player.addTerritory(GameMap.getInstance().getTerritories().get(n), 1);
-
-                n += numberTextField.getNumber();
-	        }
-
-            GameStatus.getInstance ().addPlayer(player);
+            alert.show();
         }
 
-        Stage stage = (Stage) ((Node)event.getSource()).getParent().getScene().getWindow();
+        else {
 
-        stage.close();
+            GameStatus.getInstance().reset();
 
+            for (int i = 0; i < numberTextField.getNumber(); i++) {
+
+                int n = i;
+
+                Player player = new Player(i + 1, initialArmy[numberTextField.getNumber() - 3]);
+
+                player.setTerritory(new HashSet<>());
+
+                while (n < GameMap.getInstance().getTerritories().size()) {
+
+                    player.addTerritory(GameMap.getInstance().getTerritories().get(n), 1);
+
+                    n += numberTextField.getNumber();
+                }
+
+                GameStatus.getInstance().addPlayer(player);
+            }
+
+            Stage stage = (Stage) ((Node) event.getSource()).getParent().getScene().getWindow();
+
+            stage.close();
+        }
     }
     @FXML
     public void cancel(ActionEvent event){

@@ -1,19 +1,18 @@
 package sample.utils;
-
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
-
 import java.text.NumberFormat;
 import java.text.ParseException;
 
 public class NumberTextField extends TextField {
 
 	private final NumberFormat nf;
+
+	private int min = 0;
+
+	private int max = Integer.MAX_VALUE;
 
 	private ObjectProperty<Integer> number = new SimpleObjectProperty<> ();
 
@@ -24,58 +23,50 @@ public class NumberTextField extends TextField {
 
 	public final void setNumber (Integer value) {
 
+
 		number.set (value);
 	}
 
-	public ObjectProperty<Integer> numberProperty () {
+	private ObjectProperty<Integer> numberProperty () {
 
 		return number;
 	}
 
-	public NumberTextField () {
+	public NumberTextField ()  {
 
 		this (0);
 	}
 
-	public NumberTextField (Integer value) {
+	private NumberTextField (Integer value)  {
 
 		this (value, NumberFormat.getInstance ());
+
 		initHandlers ();
 	}
 
-	public NumberTextField (Integer value, NumberFormat nf) {
+	private NumberTextField (Integer value, NumberFormat nf)  {
 
 		super ();
+
 		this.nf = nf;
+
 		initHandlers ();
+
 		setNumber (value);
 	}
 
 	private void initHandlers () {
 
 		// try to parse when focus is lost or RETURN is hit
-		setOnAction ((ActionEvent e)->parseAndFormatInput ());
+		setOnAction ((ActionEvent e) -> parseAndFormatInput());
 
-		focusedProperty ().addListener (new ChangeListener<Boolean> () {
+		focusedProperty ().addListener ((observable, oldValue, newValue) -> {
 
-			@Override
-			public void changed (ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-				if (! newValue) {
-					parseAndFormatInput ();
-				}
-			}
-		});
+            if (! newValue) parseAndFormatInput ();
+        });
 
 		// Set text in field if Integer property is changed from outside.
-		numberProperty ().addListener (new ChangeListener<Integer> () {
-
-			@Override
-			public void changed (ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
-
-				setText (nf.format (newValue));
-			}
-		});
+		numberProperty ().addListener ((observable, oldValue, newValue) -> setText (nf.format (newValue)));
 	}
 
 	/**
@@ -85,17 +76,41 @@ public class NumberTextField extends TextField {
 	private void parseAndFormatInput () {
 
 		try {
+
 			String input = getText ();
-			if (input == null || input.length () == 0) {
-				return;
-			}
+
+			if (input == null || input.length () == 0) { return; }
+
 			Number parsedNumber = nf.parse (input);
+
 			Integer newValue = new Integer (parsedNumber.toString ());
+
 			setNumber (newValue);
+
 			selectAll ();
-		} catch (ParseException ex) {
-			// If parsing fails keep old number
-			setText (nf.format (number.get ()));
+
 		}
+		catch (ParseException ex) {
+
+			setText (null);
+
+		}
+	}
+
+	public void setRange(int min, int max){
+
+		this.min = min;
+
+		this.max = max;
+	}
+
+	public boolean isOutRange(){
+
+		return this.number.getValue()> max || this.number.getValue()< min;
+	}
+
+	public String getRange() {
+
+		return "[" + min+ ", "+max+"]";
 	}
 }

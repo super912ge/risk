@@ -46,7 +46,12 @@ public class GameStatus {
 
 		currentPlayerIndex = (currentPlayerIndex + 1) % players.size ();
 
-		if (! isStart && currentPlayerIndex == 0) isStart = true;
+		if (! isStart && currentPlayerIndex == 0) {
+
+			isStart = true;
+
+			getCurrentPlayer().gainArmy();
+		}
 
 		GameUtil.initTempMap(getCurrentPlayer());
 	}
@@ -55,7 +60,12 @@ public class GameStatus {
 
 		phase = (phase + 1) % 3;
 
-		if (phase == 1) nextPlayer ();
+		if (phase == 1) {
+
+			nextPlayer ();
+
+			getCurrentPlayer().gainArmy();
+		}
 	}
 
 	public void reset () {

@@ -4,9 +4,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import sample.GameStatus;
 import sample.gamePage.status.PhaseStatus;
+import sample.model.Country;
 import sample.model.Player;
+import sample.utils.GameUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PhaseOne extends PhaseStatus {
 
@@ -14,54 +20,63 @@ public class PhaseOne extends PhaseStatus {
     private AnchorPane pane;
 
     @FXML
-    private Label player;
+    private TextFlow territory;
 
     @FXML
-    private Label army;
+    private TextFlow continent;
 
     @FXML
-    private Label territory;
-
-    @FXML
-    private Label continent;
-
-    @FXML
-    private Label stage;
+    private Text stage;
 
     @FXML
     private Text log;
 
+    private Player currentPlayer;
+
     @Override
     public AnchorPane getPane() {
-        return null;
+        return pane;
     }
 
-    @Override
-    public void update() {
-
-    }
 
     @Override
     public void init() {
 
+        currentPlayer = GameStatus.getInstance().getCurrentPlayer();
+
+        continent.getChildren().add(new Text(currentPlayer.getContinentString()));
+
+        stage.setText(stage.getText()+ GameStatus.getInstance().getPhase());
+
+        log.setText("Received " + currentPlayer.getArmy() + " new army, please select a country to place your army.");
+
+        setContent();
+
+        super.getGamePage().updatePlayer();
     }
 
-//
-//    public void update(){
-//
-//        Player currentPlayerPlayer = GameStatus.getCurrentPlayer();
-//
-//        player.setText(player.getText()+currentPlayerPlayer.getId());
-//
-//        territory.setText(territory.getText()+currentPlayerPlayer.getTerritoryString());
-//
-//        continent.setText(continent.getText()+currentPlayerPlayer.getContinentString());
-//
-//        stage.setText(stage.getText()+ GameStatus.getPhase());
-//
-//        log.setText("Received "+currentPlayerPlayer.gainArmy()+" new army, please select a country to place your army.");
-//
-//        army.setText(army.getText()+ currentPlayerPlayer.getArmy());
-//
-//    }
+
+    @Override
+    public void update(){
+
+       log.setText("");
+
+        setContent();
+    }
+
+    private void setContent(){
+
+        List<Text> textList = new ArrayList<>();
+
+        for (Country country : currentPlayer.getTerritory ()){
+
+            Text text = new Text (country.getName ()+ ": "+ GameUtil.tempArmyDistributeMap.get (country)+"   ");
+
+            textList.add (text);
+        }
+
+        territory.getChildren ().clear();
+
+        territory.getChildren().addAll (textList);
+    }
 }

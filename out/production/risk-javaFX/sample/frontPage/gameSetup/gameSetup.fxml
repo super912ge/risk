@@ -5,7 +5,7 @@
 
 <AnchorPane fx:id="setupPane" prefHeight="187.0" prefWidth="321.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.frontPage.gameSetup.GameSetup">
    <children>
-      <Button layoutX="147.0" layoutY="134.0" mnemonicParsing="false" onAction="#confirm" text="Confirm" />
+      <Button layoutX="147.0" layoutY="134.0" mnemonicParsing="false" onAction="#confirm" text="Confirm" fx:id="confirm"/>
       <Button layoutX="226.0" layoutY="134.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
    </children>
 </AnchorPane>

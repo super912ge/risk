@@ -1,6 +1,7 @@
 package sample.gamePage.status.countryStatus;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
@@ -23,7 +24,7 @@ public class CountryStatus {
     private Text country;
 
     @FXML
-    private Text player;
+    private Text owner;
 
     @FXML
     private Text continent;
@@ -49,19 +50,33 @@ public class CountryStatus {
 
     public void placeArmy(){
 
-        GameUtil.tempDistributeArmy(selectedCountry, numberTextField.getNumber());
+        if (numberTextField.isOutRange()) {
 
-        GameStatus.getInstance().getCurrentPlayer().setSpentArmy(GameStatus.getInstance().getCurrentPlayer().getSpentArmy()
-                + numberTextField.getNumber());
+            Alert alert = new Alert(Alert.AlertType.ERROR);
 
-        updateArmy();
+            alert.setContentText( numberTextField.getNumber() +" is invalid, please enter number between " + numberTextField.getRange());
 
-        GameStatus.getInstance().setCountryClicked(false);
+            alert.show();
+        }
 
-        gamePage.updatePlayer();
+        else {
 
-        gamePage.updatePhaseStatus();
+            GameUtil.tempDistributeArmy(selectedCountry, numberTextField.getNumber());
 
+            GameStatus.getInstance().getCurrentPlayer().setSpentArmy(GameStatus.getInstance().getCurrentPlayer().getSpentArmy()
+                    + numberTextField.getNumber());
+
+            updateArmy();
+
+            numberTextField.setRange(0, GameStatus.getInstance().getCurrentPlayer().getArmy() -
+                    GameStatus.getInstance().getCurrentPlayer().getSpentArmy());
+
+            GameStatus.getInstance().setCountryClicked(false);
+
+            gamePage.updatePlayer();
+
+            gamePage.playerPhase();
+        }
     }
 
     public void setGamePage(GamePage gamePage) {
@@ -84,13 +99,16 @@ public class CountryStatus {
             playerPane.getChildren().add(numberTextField);
         }
 
-        numberTextField.setDisable(!selectedCountry.getPlayer().equals(current));
+        numberTextField.setRange(0,GameStatus.getInstance().getCurrentPlayer().getArmy()-
+                GameStatus.getInstance().getCurrentPlayer().getSpentArmy());
+
+        numberTextField.setDisable(!selectedCountry.getPlayer().equals(current)||current.getArmy()==current.getSpentArmy());
 
         this.country.setText(selectedCountry.getName());
 
         this.continent.setText(selectedCountry.getContinent().getName());
 
-        this.player.setText(selectedCountry.getPlayer().getId()+" "+ selectedCountry.getPlayer().getUsername());
+        this.owner.setText(selectedCountry.getPlayer().getId()+" "+ selectedCountry.getPlayer().getUsername());
 
         this.adjacent.setText(selectedCountry.getAdjacentCountry().stream().map(Country::getName).collect(Collectors.joining(" ")));
 
@@ -106,7 +124,14 @@ public class CountryStatus {
 
         this.army.setText(GameUtil.tempArmyDistributeMap.get(selectedCountry)+"");
 
-        this.numberTextField.setNumber(0);
+        try {
+
+            this.numberTextField.setNumber(0);
+
+        } catch (IllegalArgumentException e) {
+
+            e.printStackTrace();
+        }
     }
 
     public void setSelectedCountry(Country selectedCountry) {

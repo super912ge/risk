@@ -57,10 +57,11 @@ public class PreGame extends PhaseStatus {
 		for (Map.Entry<Country,Integer> entry: GameUtil.tempArmyDistributeMap.entrySet()){
 
 			entry.getKey().setArmy(entry.getValue());
-
 		}
 
-		player.setTerritory(GameUtil.tempArmyDistributeMap.keySet());
+		player.getTerritory().clear();
+
+		player.getTerritory().addAll(GameUtil.tempArmyDistributeMap.keySet());
 
 		player.setArmy(0);
 
@@ -75,7 +76,7 @@ public class PreGame extends PhaseStatus {
 			super.getGamePage().updatePlayer();
 		}
 
-		else super.getGamePage().start();
+		else super.getGamePage().updatePhaseStatus();
 
 	}
 
@@ -94,7 +95,7 @@ public class PreGame extends PhaseStatus {
 
 		player = GameStatus.getInstance ().getCurrentPlayer ();
 
-		this.confirm.setDisable(player.getArmy()!=player.getSpentArmy());
+		this.confirm.setDisable(player.getArmy() != player.getSpentArmy());
 
 		setContent ();
 	}

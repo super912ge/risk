@@ -20,7 +20,7 @@ public class Player {
 
     private Set<Card> cards;
 
-    private Set<Country> territory = new HashSet<>();
+    private Set<Country> territory;
 
     private Set<Continent> continents = new HashSet<> ();
 
@@ -158,7 +158,7 @@ public class Player {
 	 * 
 	 * @return the number of Army gained with type int
 	 */
-    public int gainArmy(){
+    public void gainArmy(){
 
         int gainedArmy = Math.max(getTerritory().size()/3,3);
 
@@ -169,27 +169,24 @@ public class Player {
                 gainedArmy += continent.getArmy();
             }
         }
-
-        setArmy(getArmy()+gainedArmy);
-
-        return gainedArmy;
+        setArmy(gainedArmy);
     }
-//
-//     /**
-//	 * Method to get Continent String
-//	 *
-//	 * @return the get Continent String with type String
-//	 */
-//    public String getContinentString(){
-//
-//        if (continents.isEmpty()) return "";
-//
-//        StringBuilder stringBuilder = new StringBuilder();
-//
-//        territory.forEach(i-> {stringBuilder.append(i); stringBuilder.append (" ");});
-//
-//        return stringBuilder.toString();
-//    }
+
+     /**
+	 * Method to get Continent String
+	 *
+	 * @return the get Continent String with type String
+	 */
+    public String getContinentString(){
+
+        if (continents.isEmpty()) return "";
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        territory.forEach(i-> {stringBuilder.append(i); stringBuilder.append (" ");});
+
+        return stringBuilder.toString();
+    }
 
 	public Set<Card> getCards () {
 
