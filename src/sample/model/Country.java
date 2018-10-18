@@ -19,6 +19,8 @@ public class Country {
 
     private Player player;
 
+    private int army = 1;
+
     public Color getColor() {
         return color;
     }
@@ -83,4 +85,14 @@ public class Country {
 
         this.adjacentCountry = new ArrayList<>();
     }
+
+	public int getArmy () {
+
+		return army;
+	}
+
+	public void setArmy (int army) {
+
+		this.army = army;
+	}
 }

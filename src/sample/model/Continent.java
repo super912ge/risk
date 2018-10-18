@@ -19,7 +19,7 @@ public class Continent {
         this.name = name;
     }
 
-    public int getArmy() {
+	int getArmy() {
         return army;
     }
 

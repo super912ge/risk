@@ -1,18 +1,23 @@
 package sample.gamePage.status;
 import javafx.fxml.FXMLLoader;
 import sample.gamePage.status.phaseOne.PhaseOne;
-import sample.gamePage.status.phaseThree.PhaseThree;
-import sample.gamePage.status.phaseTwo.PhaseTwo;
+import sample.gamePage.status.phaseThree.PhaseStatusThree;
+import sample.gamePage.status.phaseTwo.PhaseStatusTwo;
 import java.io.IOException;
 import java.security.InvalidParameterException;
 
+/*
+
+ Switch between different game phase by loading different fxml file and return the controller.
+
+ */
 public class PhaseController {
 
-    private  PhaseOne phaseOne;
+    private PhaseOne phaseOne;
 
-    private  PhaseTwo phaseTwo;
+    private PhaseStatusTwo phaseTwo;
 
-    private  PhaseThree phaseThree;
+    private PhaseStatusThree phaseThree;
 
 
     public PhaseController () throws IOException {
@@ -37,7 +42,7 @@ public class PhaseController {
     }
 
 
-    public StatusPhase getPhase(int i){
+    public PhaseStatus getPhase(int i){
 
         if (i==1) return phaseOne;
 

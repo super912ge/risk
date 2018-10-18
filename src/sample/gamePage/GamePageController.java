@@ -1,31 +1,25 @@
 package sample.gamePage;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.stage.Stage;
-import sample.Controller;
+import sample.GameStatus;
 import sample.gamePage.status.PhaseController;
-import sample.gamePage.status.StatusPhase;
-import sample.gamePage.status.phaseOne.PhaseOne;
-import sample.gamePage.status.phaseThree.PhaseThree;
-import sample.model.Continent;
+import sample.gamePage.status.preGame.PreGame;
 import sample.model.Country;
 import sample.model.GameMap;
-import sample.model.Player;
-import sample.utils.ColorOptions;
-
-import java.awt.event.ActionEvent;
+import sample.utils.ColorUtil;
 import java.io.IOException;
-import java.util.List;
 
 public class GamePageController {
 
@@ -39,13 +33,12 @@ public class GamePageController {
     private AnchorPane statusPane;
 
     @FXML
+    private MenuItem save;
+
+    @FXML
     private AnchorPane controlPane;
 
     private PhaseController phaseController = new PhaseController();
-
-    private static int currentPlayer = 0;
-
-    private static int phase = 1;
 
     private Scene frontPage;
 
@@ -67,9 +60,14 @@ public class GamePageController {
 
     }
 
+    public void  save(){
+
+
+    }
+
     public void gainArmy(){
 
-        Controller.getCurrentPlayer().gainArmy();
+        GameStatus.getInstance ().getCurrentPlayer().gainArmy();
 
     }
 
@@ -79,11 +77,10 @@ public class GamePageController {
 
         int height = map.getCoordinator().getY();
 
-        PhaseOne phaseOne = (PhaseOne) phaseController.getPhase(Controller.getPhase());
 
-        phaseOne.update();
+	    PreGame preGame = new PreGame();
 
-        AnchorPane status = phaseOne.getPane();
+        AnchorPane status = preGame.getPane();
 
         statusPane.getChildren().addAll(status);
 
@@ -93,13 +90,13 @@ public class GamePageController {
 
             button.setText(country.getName());
 
-            Background background = new Background(new BackgroundFill(ColorOptions.getColor(map.getContinents()
+            Background background = new Background(new BackgroundFill(ColorUtil.getContinentColor (map.getContinents()
                     .indexOf(country.getContinent())), CornerRadii.EMPTY, Insets.EMPTY));
 
             button.setBackground( background);
 
 
-            button.setOnAction(event -> {
+            button.setOnAction((ActionEvent event) -> {
 
 
             });
@@ -116,4 +113,7 @@ public class GamePageController {
         }
     }
 
+	public void start () {
+
+	}
 }

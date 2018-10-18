@@ -4,11 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-import sample.Controller;
-import sample.gamePage.status.StatusPhase;
+import sample.GameStatus;
+import sample.gamePage.status.PhaseStatus;
 import sample.model.Player;
 
-public class PhaseOne implements StatusPhase{
+public class PhaseOne extends PhaseStatus {
 
     @FXML
     private AnchorPane pane;
@@ -34,7 +34,7 @@ public class PhaseOne implements StatusPhase{
 
     public void update(){
 
-        Player currentPlayerPlayer = Controller.getCurrentPlayer();
+        Player currentPlayerPlayer = GameStatus.getCurrentPlayer();
 
         player.setText(player.getText()+currentPlayerPlayer.getId());
 
@@ -42,7 +42,7 @@ public class PhaseOne implements StatusPhase{
 
         continent.setText(continent.getText()+currentPlayerPlayer.getContinentString());
 
-        stage.setText(stage.getText()+Controller.getPhase());
+        stage.setText(stage.getText()+ GameStatus.getPhase());
 
         log.setText("Received "+currentPlayerPlayer.gainArmy()+" new army, please select a country to place your army.");
 

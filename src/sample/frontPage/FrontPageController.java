@@ -26,7 +26,6 @@ public class FrontPageController {
 
     public void loadMap(ActionEvent event) throws IOException {
 
-
         FileChooser fileChooser = new FileChooser();
 
         fileChooser.setTitle("Select GameMap File To Load");

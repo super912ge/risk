@@ -31,7 +31,7 @@
                         </Lighting>
                     </effect>
                 </Button>
-                <Button layoutX="1242.0" layoutY="541.0" mnemonicParsing="false" onMouseClicked="#loadProgress" prefHeight="66.0" prefWidth="66.0" style="-fx-background-image: url('./button.jpg');" text="Load">
+                <Button fx:id="loadProgress" layoutX="1242.0" layoutY="541.0" mnemonicParsing="false" onAction="#loadProgress" onMouseClicked="#loadProgress" prefHeight="66.0" prefWidth="66.0" style="-fx-background-image: url('./button.jpg');" text="Load">
                     <font>
                         <Font name="Avenir Heavy" size="15.0" />
                     </font>

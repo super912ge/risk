@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="218.0" prefWidth="406.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.gamePage.placeArmy.PlaceArmy">
+   <children>
+      <Button defaultButton="true" layoutX="205.0" layoutY="166.0" mnemonicParsing="false" onAction="#confirm" text="Confirm" />
+      <Button cancelButton="true" layoutX="290.0" layoutY="166.0" mnemonicParsing="false" onDragDetected="#cancel" text="Cancel" />
+      <Text fx:id="placeArmyConfirm" layoutX="45.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="320.21875" />
+   </children>
+</AnchorPane>

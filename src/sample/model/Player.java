@@ -1,7 +1,7 @@
 package sample.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Player {
 
@@ -11,9 +11,13 @@ public class Player {
 
     private int army;
 
-    private List<Country> territory = new ArrayList<>();
+    private int spentArmy;
 
-    private List<Continent> continents = new ArrayList<>();
+    private Set<Card> cards;
+
+    private Set<Country> territory = new HashSet<>();
+
+    private Set<Continent> continents = new HashSet<> ();
 
     public int getId() {
         return id;
@@ -39,27 +43,30 @@ public class Player {
         this.army = army;
     }
 
-    public List<Country> getTerritory() {
+    public Set<Country> getTerritory() {
         return territory;
     }
 
-    public void setTerritory(List<Country> territory) {
+    public void setTerritory(Set<Country> territory) {
         this.territory = territory;
     }
 
-    public List<Continent> getContinents() {
+    private Set<Continent> getContinents() {
+
         return continents;
     }
 
-    public void setContinents(List<Continent> continents) {
+    public void setContinents(Set<Continent> continents) {
         this.continents = continents;
     }
 
-    public Player(int id, int army){
+    public Player(int id, int army, Set<Country> countries){
 
         this.id = id;
 
         this.army = army;
+
+        this.territory = countries;
     }
 
     public int gainArmy(){
@@ -85,7 +92,7 @@ public class Player {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        territory.forEach(i->stringBuilder.append(i+" "));
+        territory.forEach(i->{stringBuilder.append(i); stringBuilder.append (" ");});
 
         return stringBuilder.toString();
     }
@@ -96,8 +103,30 @@ public class Player {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        territory.forEach(i-> stringBuilder.append(i+" "));
+        territory.forEach(i-> {stringBuilder.append(i); stringBuilder.append (" ");});
 
         return stringBuilder.toString();
     }
+
+	public Set<Card> getCards () {
+
+		return cards;
+	}
+
+	public void setCards (Set<Card> cards) {
+
+		this.cards = cards;
+	}
+
+	public int getSpentArmy () {
+
+		return spentArmy;
+	}
+
+	public void setSpentArmy (int spentArmy) {
+
+		this.spentArmy = spentArmy;
+	}
+
+
 }

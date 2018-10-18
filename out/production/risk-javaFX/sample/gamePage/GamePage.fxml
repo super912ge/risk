@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1374.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.gamePage.GamePageController">
+<AnchorPane prefHeight="900.0" prefWidth="1374.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="sample.gamePage.GamePageController">
    <children>
       <MenuBar prefHeight="29.0" prefWidth="1374.0">
         <menus>
@@ -16,6 +15,7 @@
                   <MenuItem mnemonicParsing="false" text="New" />
                   <MenuItem mnemonicParsing="false" text="Load" />
                   <MenuItem mnemonicParsing="false" text="Main Menu" />
+                  <MenuItem fx:id="save" mnemonicParsing="false" text="Save" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
