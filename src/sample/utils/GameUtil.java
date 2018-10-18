@@ -45,9 +45,9 @@ public class GameUtil {
 		}
 	}
 
-	public static void tempDistrubuteArmy(Country country, int army) {
+	public static void tempDistributeArmy(Country country, int army) {
 
-		tempArmyDistributeMap.put (country, army);
+		tempArmyDistributeMap.computeIfPresent(country, (k,v)-> v += army);
 
 	}
 
@@ -61,5 +61,10 @@ public class GameUtil {
 		resetTempMap ();
 
 		player.getTerritory ().forEach (c -> tempArmyDistributeMap.put (c,c.getArmy ()));
+	}
+
+	public static int getDistributedArmy(){
+
+		return tempArmyDistributeMap.values().stream().mapToInt(i->i).sum();
 	}
 }

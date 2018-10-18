@@ -1,12 +1,14 @@
 package sample.gamePage;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -15,13 +17,16 @@ import javafx.scene.layout.CornerRadii;
 import javafx.stage.Stage;
 import sample.GameStatus;
 import sample.gamePage.status.PhaseController;
-import sample.gamePage.status.preGame.PreGame;
+import sample.gamePage.status.PhaseStatus;
+import sample.gamePage.status.countryStatus.CountryStatus;
 import sample.model.Country;
 import sample.model.GameMap;
+import sample.model.Player;
 import sample.utils.ColorUtil;
 import java.io.IOException;
 
-public class GamePageController {
+
+public class GamePage {
 
     @FXML
     private ImageView gameMap;
@@ -29,14 +34,18 @@ public class GamePageController {
     @FXML
     private AnchorPane gameMapPane;
 
+    private PhaseStatus phaseStatus;
+
+    @FXML
+    private Label playerInfo;
+
     @FXML
     private AnchorPane statusPane;
 
     @FXML
-    private MenuItem save;
-
-    @FXML
     private AnchorPane controlPane;
+
+    private CountryStatus countryStatus ;
 
     private PhaseController phaseController = new PhaseController();
 
@@ -44,8 +53,7 @@ public class GamePageController {
 
     private GameMap map = GameMap.getInstance();
 
-    public GamePageController() throws IOException {
-    }
+    public GamePage() throws IOException {}
 
     public void setFrontPage(Scene scene){
 
@@ -65,6 +73,13 @@ public class GamePageController {
 
     }
 
+    public void updatePlayer(){
+
+        Player player = GameStatus.getInstance().getCurrentPlayer();
+
+        playerInfo.setText(player.playerInfo());
+    }
+
     public void gainArmy(){
 
         GameStatus.getInstance ().getCurrentPlayer().gainArmy();
@@ -77,12 +92,15 @@ public class GamePageController {
 
         int height = map.getCoordinator().getY();
 
+        phaseStatus = phaseController.getPhase();
 
-	    PreGame preGame = new PreGame();
+        phaseStatus.setGamePage(this);
 
-        AnchorPane status = preGame.getPane();
+	    phaseStatus.init();
 
-        statusPane.getChildren().addAll(status);
+	    updatePlayer();
+
+        statusPane.getChildren().add(phaseStatus.getPane());
 
         for (Country country: map.getTerritories()){
 
@@ -95,10 +113,32 @@ public class GamePageController {
 
             button.setBackground( background);
 
-
             button.setOnAction((ActionEvent event) -> {
 
+                if(countryStatus == null) {
 
+                    FXMLLoader loaderCountry = new FXMLLoader(this.getClass()
+                            .getResource("./status/countryStatus/CountryStatus.fxml"));
+
+                    try {
+
+                        loaderCountry.load();
+
+                        countryStatus = loaderCountry.getController();
+
+                        countryStatus.setGamePage(this);
+
+                    } catch (IOException e) { e.printStackTrace(); }
+                }
+
+                countryStatus.setSelectedCountry(country);
+
+               if( !GameStatus.getInstance().isCountryClicked()){
+
+                   GameStatus.getInstance().setCountryClicked(true);
+
+                   statusPane.getChildren().set(1,countryStatus.getCountryStatusPane());
+                }
             });
 
             double x = ((double) country.getCoordinator().getX()/width)*gameMap.getFitWidth()*0.68;
@@ -116,4 +156,13 @@ public class GamePageController {
 	public void start () {
 
 	}
+
+	public void updatePhaseStatus(){
+
+        phaseStatus = phaseController.getPhase();
+
+        phaseStatus.update();
+
+        statusPane.getChildren().set(1,phaseStatus.getPane());
+    }
 }

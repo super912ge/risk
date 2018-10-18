@@ -49,17 +49,20 @@ public class GameSetup {
 
         GameStatus.getInstance ().reset();
 
-        for(int i =0, n = 0; i< numberTextField.getNumber(); i++) {
+        for(int i =0; i< numberTextField.getNumber(); i++) {
 
-	        Set<Country> territory = new HashSet<> ();
+            int n = i;
 
-        	while ( n*i < GameMap.getInstance ().getTerritories ().size ()){
+            Player player = new Player(i+1,initialArmy[numberTextField.getNumber()-3]);
 
-        		territory.add (GameMap.getInstance ().getTerritories ().get (i*n++));
+        	while ( n < GameMap.getInstance ().getTerritories ().size ()){
+
+        		player.addTerritory(GameMap.getInstance().getTerritories().get(n), 1);
+
+                n += numberTextField.getNumber();
 	        }
 
-            GameStatus.getInstance ().addPlayer(new Player(i+1, initialArmy[numberTextField.getNumber()-3], territory));
-
+            GameStatus.getInstance ().addPlayer(player);
         }
 
         Stage stage = (Stage) ((Node)event.getSource()).getParent().getScene().getWindow();

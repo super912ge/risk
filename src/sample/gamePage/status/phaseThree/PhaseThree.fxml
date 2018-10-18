@@ -4,7 +4,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.gamePage.status.phaseThree.PhaseStatusThree"
-            prefHeight="572.0" prefWidth="345.00">
+            fx:controller="sample.gamePage.status.phaseThree.PhaseThree"
+            prefHeight="485.0" prefWidth="340.0" layoutY="95.0">
 
 </AnchorPane>

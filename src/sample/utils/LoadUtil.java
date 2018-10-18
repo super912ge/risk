@@ -66,7 +66,7 @@ public class LoadUtil {
 
         countryMap.values().forEach(c->{
 
-            List<Country> adjacent = c.getAdjacentCountry();
+            Set<Country> adjacent = c.getAdjacentCountry();
 
             adjacent.forEach(a-> { if(!a.getAdjacentCountry().contains(c))
 

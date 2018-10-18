@@ -1,6 +1,7 @@
 package sample;
 
 import sample.model.Player;
+import sample.utils.GameUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,8 @@ public class GameStatus {
 
 		return instance;
 	}
+
+	private boolean countryClicked = false;
 
 	private List<Player> players;
 
@@ -44,6 +47,8 @@ public class GameStatus {
 		currentPlayerIndex = (currentPlayerIndex + 1) % players.size ();
 
 		if (! isStart && currentPlayerIndex == 0) isStart = true;
+
+		GameUtil.initTempMap(getCurrentPlayer());
 	}
 
 	public void nextPhase () {
@@ -67,4 +72,11 @@ public class GameStatus {
 		return isStart;
 	}
 
+	public boolean isCountryClicked() {
+		return countryClicked;
+	}
+
+	public void setCountryClicked(boolean countryClicked) {
+		this.countryClicked = countryClicked;
+	}
 }

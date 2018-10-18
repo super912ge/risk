@@ -1,15 +1,33 @@
 package sample.gamePage.status;
-
-import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
+import sample.gamePage.GamePage;
+
 
 public abstract class PhaseStatus {
 
-    @FXML
-    private AnchorPane pane;
+    private GamePage gamePage;
 
-    public AnchorPane getPane(){
+    public abstract AnchorPane getPane();
 
-        return pane;
+    public void addPane(Node node){
+
+        getPane().getChildren().add(node);
+
     }
+
+    public abstract void update();
+
+    public abstract void init();
+
+    public void setGamePage(GamePage gamePage){
+
+        this.gamePage = gamePage;
+    }
+
+    protected GamePage getGamePage(){
+
+        return this.gamePage;
+    }
+
 }

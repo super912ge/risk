@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import sample.frontPage.FrontPageController;
-import sample.gamePage.GamePageController;
+import sample.gamePage.GamePage;
 
 public class Main extends Application {
 
@@ -16,7 +16,7 @@ public class Main extends Application {
 
     private FrontPageController frontPageController;
 
-    private GamePageController gamePageController;
+    private GamePage gamePageController;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -83,11 +83,11 @@ public class Main extends Application {
         this.frontPageController = frontPageController;
     }
 
-    public GamePageController getGamePageController() {
+    public GamePage getGamePageController() {
         return gamePageController;
     }
 
-    public void setGamePageController(GamePageController gamePageController) {
+    public void setGamePageController(GamePage gamePageController) {
         this.gamePageController = gamePageController;
     }
 

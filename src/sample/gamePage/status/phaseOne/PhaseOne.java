@@ -31,27 +31,37 @@ public class PhaseOne extends PhaseStatus {
     @FXML
     private Text log;
 
+    @Override
+    public AnchorPane getPane() {
+        return null;
+    }
 
-    public void update(){
-
-        Player currentPlayerPlayer = GameStatus.getCurrentPlayer();
-
-        player.setText(player.getText()+currentPlayerPlayer.getId());
-
-        territory.setText(territory.getText()+currentPlayerPlayer.getTerritoryString());
-
-        continent.setText(continent.getText()+currentPlayerPlayer.getContinentString());
-
-        stage.setText(stage.getText()+ GameStatus.getPhase());
-
-        log.setText("Received "+currentPlayerPlayer.gainArmy()+" new army, please select a country to place your army.");
-
-        army.setText(army.getText()+ currentPlayerPlayer.getArmy());
+    @Override
+    public void update() {
 
     }
 
     @Override
-    public AnchorPane getPane() {
-        return this.pane;
+    public void init() {
+
     }
+
+//
+//    public void update(){
+//
+//        Player currentPlayerPlayer = GameStatus.getCurrentPlayer();
+//
+//        player.setText(player.getText()+currentPlayerPlayer.getId());
+//
+//        territory.setText(territory.getText()+currentPlayerPlayer.getTerritoryString());
+//
+//        continent.setText(continent.getText()+currentPlayerPlayer.getContinentString());
+//
+//        stage.setText(stage.getText()+ GameStatus.getPhase());
+//
+//        log.setText("Received "+currentPlayerPlayer.gainArmy()+" new army, please select a country to place your army.");
+//
+//        army.setText(army.getText()+ currentPlayerPlayer.getArmy());
+//
+//    }
 }

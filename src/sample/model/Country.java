@@ -3,7 +3,8 @@ package sample.model;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * This class is to handle the information of country and manage various
@@ -16,7 +17,7 @@ public class Country {
 
     private String name;
 
-    private List<Country> adjacentCountry;
+    private Set<Country> adjacentCountry;
 
     private Coordinator coordinator;
 
@@ -68,7 +69,7 @@ public class Country {
 	 * 
 	 * @return the list of the adjacent countries with List type
 	 */
-    public List<Country> getAdjacentCountry() {
+    public Set<Country> getAdjacentCountry() {
         return adjacentCountry;
     }
     /**
@@ -77,7 +78,7 @@ public class Country {
 	 * @param adjacentCountry
 	 *            the list of the adjacent countries with List type
 	 */
-    public void setAdjacentCountry(List<Country> adjacentCountry) {
+    public void setAdjacentCountry(Set<Country> adjacentCountry) {
         this.adjacentCountry = adjacentCountry;
     }
     /**
@@ -130,7 +131,7 @@ public class Country {
 
         this.coordinator = coordinator;
 
-        this.adjacentCountry = new ArrayList<>();
+        this.adjacentCountry = new HashSet<>();
     }
     /**
 	 * To get the continent
@@ -160,7 +161,7 @@ public class Country {
 
         this.name = name;
 
-        this.adjacentCountry = new ArrayList<>();
+        this.adjacentCountry = new HashSet<>();
     }
 
 	public int getArmy () {

@@ -12,12 +12,11 @@ public class Player {
 
     private int id;
 
-    private String username;
+    private String username = "";
 
     private int army;
 
-    private int spentArmy;
-
+    private int spentArmy = 0;
 
     private Set<Card> cards;
 
@@ -34,17 +33,7 @@ public class Player {
     public int getId() {
         return id;
     }
-    
-    /**
-	 * To set the player ID number
-	 * 
-	 * @param id
-	 *            the desired the player ID number that want to be set with int
-	 *            type
-	 */
-    public void setId(int id) {
-        this.id = id;
-    }
+
     
 	/**
 	 * To get the player name
@@ -106,11 +95,19 @@ public class Player {
 	 */
 
     public void setTerritory(Set<Country> territory) {
-        this.territory = territory;
+
+    	this.territory = territory;
+
+		updateContinent();
     }
 
-
-
+	/**
+	 * To set the continents set to belong to the player
+	 *
+	 * @param continents
+	 *            the continents set desired to be set to belong to the player
+	 *            with HashSet type
+	 */
 
     public void setContinents(Set<Continent> continents) {
 
@@ -126,13 +123,7 @@ public class Player {
 
 		    return continents;
 	    }
-    /**
-	 * To set the countinents list to belong to the player
-	 * 
-	 * @param continents
-	 *            the continents list desired to be set to belong to the player
-	 *            with ArrayList type
-	 */
+
 
     /**
 	 * Constructor method
@@ -155,6 +146,13 @@ public class Player {
 
         this.territory = territory;
     }
+
+    public Player(int id, int army){
+
+    	this.id = id;
+
+    	this.army = army;
+	}
     /**
 	 * Method to gain the number of Army
 	 * 
@@ -164,7 +162,7 @@ public class Player {
 
         int gainedArmy = Math.max(getTerritory().size()/3,3);
 
-        if (getContinents()!=null&& getContinents().isEmpty()){
+        if (getContinents()!=null && !getContinents().isEmpty()){
 
             for (Continent continent : getContinents()) {
 
@@ -176,37 +174,22 @@ public class Player {
 
         return gainedArmy;
     }
-    /**
-	 * Method to get territory with type String
-	 * 
-	 * @return the territoy string with String type
-	 */   
-
-    public String getTerritoryString(){
-
-        if (territory.isEmpty()) return "";
-
-        StringBuilder stringBuilder = new StringBuilder();
-
-        territory.forEach(i->{stringBuilder.append(i); stringBuilder.append (" ");});
-
-        return stringBuilder.toString();
-    }
-     /**
-	 * Method to get Continent String
-	 * 
-	 * @return the get Continent String with type String
-	 */
-    public String getContinentString(){
-
-        if (continents.isEmpty()) return "";
-
-        StringBuilder stringBuilder = new StringBuilder();
-
-        territory.forEach(i-> {stringBuilder.append(i); stringBuilder.append (" ");});
-
-        return stringBuilder.toString();
-    }
+//
+//     /**
+//	 * Method to get Continent String
+//	 *
+//	 * @return the get Continent String with type String
+//	 */
+//    public String getContinentString(){
+//
+//        if (continents.isEmpty()) return "";
+//
+//        StringBuilder stringBuilder = new StringBuilder();
+//
+//        territory.forEach(i-> {stringBuilder.append(i); stringBuilder.append (" ");});
+//
+//        return stringBuilder.toString();
+//    }
 
 	public Set<Card> getCards () {
 
@@ -228,5 +211,36 @@ public class Player {
 		this.spentArmy = spentArmy;
 	}
 
+
+	public void addTerritory(Country country, int armyAssigned){
+
+    	country.setPlayer(this);
+
+    	country.setArmy(armyAssigned);
+
+    	this.army -= armyAssigned;
+
+    	this.territory.add(country);
+
+    	updateContinent();
+
+	}
+
+	private void updateContinent(){
+
+		for (Continent c: GameMap.getInstance().getContinents()) {
+
+			if ( !this.continents.contains(c) && this.territory.containsAll(c.getCountries())){
+
+				this.continents.add(c);
+			}
+
+		}
+	}
+
+	public String playerInfo(){
+
+		return "Player: "+ id+ " " + username + " Available Army : "+ (army - spentArmy);
+	}
 
 }
