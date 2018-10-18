@@ -2,49 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/gamePage/placeArmy/PlaceArmy.fxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/gamePage/placeArmy/PlaceArmy.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/gamePage/status/PhaseStatus.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/gamePage/status/phaseThree/PhaseStatusThree.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/gamePage/status/preGame/PreGame.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/gamePage/status/preGame/preGame.fxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/model/Card.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/sample/utils/GameUtil.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/risk-javaFX/sample/Controller.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/gamePage/status/StatusPhase.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/sample/gamePage/status/phaseThree/PhaseThree.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/sample/Controller.java" afterPath="$PROJECT_DIR$/src/sample/GameStatus.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/sample/gamePage/status/phaseTwo/PhaseTwo.java" afterPath="$PROJECT_DIR$/src/sample/gamePage/status/phaseTwo/PhaseStatusTwo.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/sample/utils/ColorOptions.java" afterPath="$PROJECT_DIR$/src/sample/utils/ColorUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/risk-javaFX/sample/frontPage/FrontPageController.class" afterPath="$PROJECT_DIR$/out/production/risk-javaFX/sample/frontPage/FrontPageController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/risk-javaFX/sample/frontPage/gameSetup/GameSetup.class" afterPath="$PROJECT_DIR$/out/production/risk-javaFX/sample/frontPage/gameSetup/GameSetup.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/risk-javaFX/sample/gamePage/GamePageController.class" afterPath="$PROJECT_DIR$/out/production/risk-javaFX/sample/gamePage/GamePageController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/risk-javaFX/sample/gamePage/status/PhaseController.class" afterPath="$PROJECT_DIR$/out/production/risk-javaFX/sample/gamePage/status/PhaseController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/risk-javaFX/sample/gamePage/status/phaseOne/PhaseOne.class" afterPath="$PROJECT_DIR$/out/production/risk-javaFX/sample/gamePage/status/phaseOne/PhaseOne.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/risk-javaFX/sample/gamePage/status/phaseTwo/PhaseTwo.class" afterPath="$PROJECT_DIR$/out/production/risk-javaFX/sample/gamePage/status/phaseTwo/PhaseTwo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/risk-javaFX/sample/utils/LoadUtil.class" afterPath="$PROJECT_DIR$/out/production/risk-javaFX/sample/utils/LoadUtil.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/risk-javaFX/sample/frontPage/FrontPage.fxml" afterPath="$PROJECT_DIR$/out/production/risk-javaFX/sample/frontPage/FrontPage.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/risk-javaFX/sample/gamePage/GamePage.fxml" afterPath="$PROJECT_DIR$/out/production/risk-javaFX/sample/gamePage/GamePage.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/risk-javaFX/sample/gamePage/status/phaseTwo/PhaseTwo.fxml" afterPath="$PROJECT_DIR$/out/production/risk-javaFX/sample/gamePage/status/phaseTwo/PhaseTwo.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/frontPage/FrontPage.fxml" afterPath="$PROJECT_DIR$/src/sample/frontPage/FrontPage.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/frontPage/FrontPageController.java" afterPath="$PROJECT_DIR$/src/sample/frontPage/FrontPageController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/frontPage/gameSetup/GameSetup.java" afterPath="$PROJECT_DIR$/src/sample/frontPage/gameSetup/GameSetup.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/frontPage/gameSetup/gameSetup.fxml" afterPath="$PROJECT_DIR$/src/sample/frontPage/gameSetup/gameSetup.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/gamePage/GamePage.fxml" afterPath="$PROJECT_DIR$/src/sample/gamePage/GamePage.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/gamePage/GamePageController.java" afterPath="$PROJECT_DIR$/src/sample/gamePage/GamePageController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/gamePage/status/PhaseController.java" afterPath="$PROJECT_DIR$/src/sample/gamePage/status/PhaseController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/gamePage/status/phaseOne/PhaseOne.java" afterPath="$PROJECT_DIR$/src/sample/gamePage/status/phaseOne/PhaseOne.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/gamePage/status/phaseThree/PhaseThree.fxml" afterPath="$PROJECT_DIR$/src/sample/gamePage/status/phaseThree/PhaseThree.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/gamePage/status/phaseTwo/PhaseTwo.fxml" afterPath="$PROJECT_DIR$/src/sample/gamePage/status/phaseTwo/PhaseTwo.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/model/Continent.java" afterPath="$PROJECT_DIR$/src/sample/model/Continent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/model/Coordinator.java" afterPath="$PROJECT_DIR$/src/sample/model/Coordinator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/model/Country.java" afterPath="$PROJECT_DIR$/src/sample/model/Country.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/model/Player.java" afterPath="$PROJECT_DIR$/src/sample/model/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/sample/utils/NumberTextField.java" afterPath="$PROJECT_DIR$/src/sample/utils/NumberTextField.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -102,10 +63,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GamePageController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GamePageController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/gamePage/GamePageController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
+            <state relative-caret-position="295">
               <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
               <folding />
             </state>
@@ -169,6 +130,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sample/model/Player.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1003">
+              <caret line="154" column="0" lean-forward="true" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1516#1517#0" expanded="true" />
+                <element signature="e#1548#1549#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="preGame.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/gamePage/status/preGame/preGame.fxml">
           <provider selected="true" editor-type-id="text-editor">
@@ -184,13 +159,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/model/Player.java">
+      <file leaf-file-name="Country.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/sample/model/Country.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="41" column="10" lean-forward="false" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
+            <state relative-caret-position="401">
+              <caret line="175" column="0" lean-forward="true" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#733#734#0" expanded="true" />
+                <element signature="e#767#768#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -206,16 +183,6 @@
           </provider>
           <provider editor-type-id="JavaFX-Scene-Builder">
             <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PhaseController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/gamePage/status/PhaseController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="19" column="40" lean-forward="true" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
-              <folding />
-            </state>
           </provider>
         </entry>
       </file>
@@ -314,8 +281,6 @@
         <option value="$PROJECT_DIR$/src/sample/gamePage/status/phaseOne/PhaseOne.java" />
         <option value="$PROJECT_DIR$/src/sample/gamePage/status/phaseTwo/PhaseStatusTwo.java" />
         <option value="$PROJECT_DIR$/src/sample/utils/ColorUtil.java" />
-        <option value="$PROJECT_DIR$/src/sample/model/Country.java" />
-        <option value="$PROJECT_DIR$/src/sample/model/Player.java" />
         <option value="$PROJECT_DIR$/src/sample/utils/GameUtil.java" />
         <option value="$PROJECT_DIR$/src/sample/GameStatus.java" />
         <option value="$PROJECT_DIR$/src/sample/gamePage/status/PhaseController.java" />
@@ -327,6 +292,8 @@
         <option value="$PROJECT_DIR$/src/sample/gamePage/placeArmy/PlaceArmy.fxml" />
         <option value="$PROJECT_DIR$/src/sample/gamePage/placeArmy/PlaceArmy.java" />
         <option value="$PROJECT_DIR$/src/sample/gamePage/GamePageController.java" />
+        <option value="$PROJECT_DIR$/src/sample/model/Player.java" />
+        <option value="$PROJECT_DIR$/src/sample/model/Country.java" />
       </list>
     </option>
   </component>
@@ -398,8 +365,7 @@
               <item name="risk-javaFX" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="sample" type="462c0819:PsiDirectoryNode" />
-              <item name="gamePage" type="462c0819:PsiDirectoryNode" />
-              <item name="status" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="risk-javaFX" type="b2602c69:ProjectViewProjectNode" />
@@ -604,12 +570,12 @@
       <workItem from="1359379250712" duration="1302000" />
       <workItem from="1539537345838" duration="1022000" />
       <workItem from="1539541811245" duration="38082000" />
-      <workItem from="1539824705158" duration="11348000" />
+      <workItem from="1539824705158" duration="11946000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60023000" />
+    <option name="totallyTimeSpent" value="60621000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -836,10 +802,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
           <caret line="23" column="5" lean-forward="true" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
-          <folding>
-            <element signature="e#333#334#0" expanded="true" />
-            <element signature="e#360#361#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -935,14 +898,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/model/Country.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="21" column="25" lean-forward="true" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/utils/GameUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="558">
@@ -958,16 +913,6 @@
         <state relative-caret-position="638">
           <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/model/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="41" column="10" lean-forward="false" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1060,9 +1005,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/gamePage/GamePageController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
+        <state relative-caret-position="295">
           <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/model/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1003">
+          <caret line="154" column="0" lean-forward="true" selection-start-line="154" selection-start-column="0" selection-end-line="154" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1516#1517#0" expanded="true" />
+            <element signature="e#1548#1549#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/model/Country.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="175" column="0" lean-forward="true" selection-start-line="175" selection-start-column="0" selection-end-line="175" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#733#734#0" expanded="true" />
+            <element signature="e#767#768#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
