@@ -7,7 +7,6 @@ import org.junit.Test;
 
 import GameConsole.Model.Player.Group;
 import GameConsole.Model.Player.Player;
-import GameConsole.Strategy.HumanStrategy;
 
 /**
  * this class is test class for class Player. Check method of adding new player
