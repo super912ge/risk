@@ -1,6 +1,7 @@
 package sample.gamePage.status.countryStatus;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
@@ -13,6 +14,7 @@ import sample.model.Player;
 import sample.utils.GameUtil;
 import sample.utils.NumberTextField;
 
+import java.io.IOException;
 import java.util.stream.Collectors;
 
 public class CountryStatus {
@@ -47,6 +49,8 @@ public class CountryStatus {
 
     private NumberTextField numberTextField;
 
+    private MoveArmy moveArmy;
+
 
     public void placeArmy(){
 
@@ -61,21 +65,39 @@ public class CountryStatus {
 
         else {
 
-            GameUtil.tempDistributeArmy(selectedCountry, numberTextField.getNumber());
-
-            GameStatus.getInstance().getCurrentPlayer().setSpentArmy(GameStatus.getInstance().getCurrentPlayer().getSpentArmy()
-                    + numberTextField.getNumber());
-
-            updateArmy();
-
-            numberTextField.setRange(0, GameStatus.getInstance().getCurrentPlayer().getArmy() -
-                    GameStatus.getInstance().getCurrentPlayer().getSpentArmy());
-
             GameStatus.getInstance().setCountryClicked(false);
 
-            gamePage.updatePlayer();
+            if (GameStatus.getInstance().isStart()&&GameStatus.getInstance().getPhase()==3){
 
-            gamePage.playerPhase();
+                selectedCountry.setArmy(selectedCountry.getArmy()-numberTextField.getNumber());
+
+                moveArmy.getSelected().setArmy(moveArmy.getSelected().getArmy()+numberTextField.getNumber());
+
+                GameStatus.getInstance().nextPhase();
+
+                gamePage.updatePlayer();
+
+                gamePage.updatePhaseStatus();
+
+                playerPane.getChildren().remove(6);
+
+            }else {
+
+                GameUtil.tempDistributeArmy(selectedCountry, numberTextField.getNumber());
+
+                GameStatus.getInstance().getCurrentPlayer().setSpentArmy(GameStatus.getInstance().getCurrentPlayer().getSpentArmy()
+                        + numberTextField.getNumber());
+
+                numberTextField.setRange(0, GameStatus.getInstance().getCurrentPlayer().getArmy() -
+                        GameStatus.getInstance().getCurrentPlayer().getSpentArmy());
+
+                updateArmy();
+
+                gamePage.updatePlayer();
+
+                gamePage.playerPhase();
+            }
+
         }
     }
 
@@ -84,7 +106,7 @@ public class CountryStatus {
         this.gamePage = gamePage;
     }
 
-    private void update(){
+    private void update() throws IOException {
 
         Player current = GameStatus.getInstance().getCurrentPlayer();
 
@@ -118,6 +140,29 @@ public class CountryStatus {
         this.army.setText(army +"");
 
         this.place.setDisable(!current.equals(selectedCountry.getPlayer()));
+
+        if (GameStatus.getInstance().isStart()&& GameStatus.getInstance().getPhase()==3){
+
+            if (moveArmy == null) {
+
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MoveArmy.fxml"));
+
+                fxmlLoader.load();
+
+                moveArmy = fxmlLoader.getController();
+            }
+
+            moveArmy.setFrom(selectedCountry);
+
+            if (playerPane.getChildren().size()>6) playerPane.getChildren().set(6,moveArmy.getMoveArmy());
+
+            else  playerPane.getChildren().add(moveArmy.getMoveArmy());
+
+            numberTextField.setRange(0,selectedCountry.getArmy()-1);
+
+            numberTextField.setDisable(!selectedCountry.getPlayer().equals(GameStatus.getInstance().getCurrentPlayer())&&
+            selectedCountry.getArmy()>1);
+        }
     }
 
     private void updateArmy(){
@@ -134,7 +179,7 @@ public class CountryStatus {
         }
     }
 
-    public void setSelectedCountry(Country selectedCountry) {
+    public void setSelectedCountry(Country selectedCountry) throws IOException {
 
         this.selectedCountry = selectedCountry;
 
@@ -150,7 +195,9 @@ public class CountryStatus {
 
         GameStatus.getInstance().setCountryClicked(false);
 
-        gamePage.updatePhaseStatus();
+        gamePage.updatePlayer();
+
+        gamePage.playerPhase();
     }
 
 }

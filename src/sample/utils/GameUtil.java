@@ -32,6 +32,16 @@ public class GameUtil {
 
 	}
 
+	public static Set<Country> getFinalCountry(){
+
+		for (Map.Entry<Country,Integer> entry: tempArmyDistributeMap.entrySet()){
+
+			entry.getKey().setArmy(entry.getValue());
+		}
+
+		return tempArmyDistributeMap.keySet();
+	}
+
 	private static void connectedCountryUtil(Country c, Set<Country> visited, Set<Country> available){
 
 		for (Country country: c.getAdjacentCountry ()){

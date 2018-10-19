@@ -58,9 +58,11 @@ public class GameStatus {
 
 	public void nextPhase () {
 
-		phase = (phase + 1) % 3;
+		phase = (phase + 1) % 4;
 
-		if (phase == 1) {
+		if (phase==0) phase =1;
+
+		if (isStart && phase == 1) {
 
 			nextPlayer ();
 

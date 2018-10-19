@@ -5,9 +5,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane fx:id="countryStatusPane" dividerPositions="0.5" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="485.0" prefWidth="345.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.gamePage.status.countryStatus.CountryStatus">
+<SplitPane fx:id="countryStatusPane" dividerPositions="0.42650103519668736" layoutY="95.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="485.0" prefWidth="345.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.gamePage.status.countryStatus.CountryStatus">
    <items>
-      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="345.0">
+      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="199.0" prefWidth="343.0">
          <children>
             <Label layoutX="20.0" layoutY="135.0" prefHeight="28.0" prefWidth="72.0" text="Adjacent:" />
             <Label layoutX="20.0" layoutY="30.0" prefHeight="28.0" prefWidth="72.0" text="Country:" />
@@ -19,13 +19,13 @@
             <Text fx:id="adjacent" layoutX="106.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="134.7294921875" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="playerPane" minHeight="0.0" minWidth="0.0" prefHeight="235.0" prefWidth="345.0">
+      <AnchorPane fx:id="playerPane" minHeight="0.0" minWidth="0.0" prefHeight="317.0" prefWidth="343.0">
          <children>
             <Label layoutX="20.0" layoutY="30.0" prefHeight="28.0" prefWidth="72.0" text="Player:" />
             <Text fx:id="owner" layoutX="77.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="231.7294921875" />
-            <Button fx:id="place" defaultButton="true" layoutX="101.0" layoutY="145.0" mnemonicParsing="false" onAction="#placeArmy" text="Place" />
+            <Button fx:id="place" defaultButton="true" layoutX="103.0" layoutY="183.0" mnemonicParsing="false" onAction="#placeArmy" text="Place" />
             <Label layoutX="20.0" layoutY="70.0" prefHeight="28.0" prefWidth="83.0" text="Place army:" />
-            <Button cancelButton="true" layoutX="183.0" layoutY="145.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+            <Button cancelButton="true" layoutX="181.0" layoutY="183.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
          </children>
       </AnchorPane>
    </items>

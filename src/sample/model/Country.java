@@ -58,8 +58,7 @@ public class Country {
 	 * To set a name to the country
 	 * 
 	 * @param name
-	 *            the desired name that want to set to the country with String
-	 *            type
+	 *            the desired name that want to set to the country with String type
 	 */
     public void setName(String name) {
         this.name = name;
@@ -172,5 +171,11 @@ public class Country {
 	public void setArmy (int army) {
 
 		this.army = army;
+	}
+
+	@Override
+	public String toString() {
+
+		return name +" "+ army;
 	}
 }

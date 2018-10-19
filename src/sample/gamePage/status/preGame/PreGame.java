@@ -54,14 +54,9 @@ public class PreGame extends PhaseStatus {
 
 		input.setText ("");
 
-		for (Map.Entry<Country,Integer> entry: GameUtil.tempArmyDistributeMap.entrySet()){
-
-			entry.getKey().setArmy(entry.getValue());
-		}
-
 		player.getTerritory().clear();
 
-		player.getTerritory().addAll(GameUtil.tempArmyDistributeMap.keySet());
+		player.getTerritory().addAll(GameUtil.getFinalCountry());
 
 		player.setArmy(0);
 

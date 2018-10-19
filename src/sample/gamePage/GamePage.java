@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -79,13 +80,7 @@ public class GamePage {
 
         playerInfo.setText(player.playerInfo());
     }
-
-    public void gainArmy(){
-
-        GameStatus.getInstance ().getCurrentPlayer().gainArmy();
-
-    }
-
+    
     public void renderMap() throws IOException {
 
         int width = map.getCoordinator().getX();
@@ -131,9 +126,21 @@ public class GamePage {
                     } catch (IOException e) { e.printStackTrace(); }
                 }
 
-                countryStatus.setSelectedCountry(country);
+                try {
 
-               if( !GameStatus.getInstance().isCountryClicked()){
+                    countryStatus.setSelectedCountry(country);
+
+                } catch (IOException e) {
+
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+
+                    alert.setContentText(e.getMessage());
+
+                    alert.show();
+
+                }
+
+                if( !GameStatus.getInstance().isCountryClicked()){
 
                    GameStatus.getInstance().setCountryClicked(true);
 

@@ -46,7 +46,7 @@ public class PhaseOne extends PhaseStatus {
 
         continent.getChildren().add(new Text(currentPlayer.getContinentString()));
 
-        stage.setText(stage.getText()+ GameStatus.getInstance().getPhase());
+        stage.setText(""+GameStatus.getInstance().getPhase());
 
         log.setText("Received " + currentPlayer.getArmy() + " new army, please select a country to place your army.");
 
@@ -62,6 +62,21 @@ public class PhaseOne extends PhaseStatus {
        log.setText("");
 
         setContent();
+
+        if (currentPlayer.getArmy()==currentPlayer.getSpentArmy()){
+
+            currentPlayer.getTerritory().clear();
+
+            currentPlayer.getTerritory().addAll(GameUtil.getFinalCountry());
+
+            GameStatus.getInstance().nextPhase();
+
+            //Second phase hasn't implemented yet, jump to third phase;
+
+            GameStatus.getInstance().nextPhase();
+
+            super.getGamePage().updatePhaseStatus();
+        }
     }
 
     private void setContent(){
