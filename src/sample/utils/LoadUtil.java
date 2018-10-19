@@ -11,6 +11,12 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Stream;
 
+
+/**
+ * LoadUtil class manages the reading and writing map information from or to a .map file.
+ * It also provides a format checking when reading a .map file to ensure the information can
+ * be correctly loaded into the map editor.
+ */
 public class LoadUtil {
     
     private static String label = "";
@@ -23,6 +29,10 @@ public class LoadUtil {
 
     private static int h =0 ;
 
+    /**
+     * Method to get Continent by the input name.
+     * param
+     */
     private static Continent getContinent(String name){
 
        return continentMap.get(name);

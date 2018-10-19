@@ -6,6 +6,10 @@ import javafx.scene.control.TextField;
 import java.text.NumberFormat;
 import java.text.ParseException;
 
+
+/**
+ * NumberTextField class is to show the changed number
+ */
 public class NumberTextField extends TextField {
 
 	private final NumberFormat nf;
@@ -21,22 +25,35 @@ public class NumberTextField extends TextField {
 		return number.get ();
 	}
 
+	/**
+	 * param value set new value
+	 */
 	public final void setNumber (Integer value) {
 
 
 		number.set (value);
 	}
 
+
+	/**
+	 * @return number is the Property
+	 */
 	private ObjectProperty<Integer> numberProperty () {
 
 		return number;
 	}
 
+	/**
+	 * constructor of class NumberTextField
+	 */
 	public NumberTextField ()  {
 
 		this (0);
 	}
 
+	/**
+	 * constructor of class NumberTextField with input
+	 */
 	private NumberTextField (Integer value)  {
 
 		this (value, NumberFormat.getInstance ());
@@ -44,6 +61,9 @@ public class NumberTextField extends TextField {
 		initHandlers ();
 	}
 
+	/**
+	 * constructor of class NumberTextField with input
+	 */
 	private NumberTextField (Integer value, NumberFormat nf)  {
 
 		super ();
@@ -55,6 +75,9 @@ public class NumberTextField extends TextField {
 		setNumber (value);
 	}
 
+	/**
+	 * initial the Handlers
+	 */
 	private void initHandlers () {
 
 		// try to parse when focus is lost or RETURN is hit
@@ -97,6 +120,11 @@ public class NumberTextField extends TextField {
 		}
 	}
 
+	/**
+	 * set the minimum and the maximum number
+	 * @param min the minimum number
+	 *        max the minimum number
+	 */
 	public void setRange(int min, int max){
 
 		this.min = min;
@@ -104,11 +132,20 @@ public class NumberTextField extends TextField {
 		this.max = max;
 	}
 
+	/**
+	 * if the number is valid
+	 * @return true the number is valid
+	 *        fault the number is not valid
+	 */
 	public boolean isOutRange(){
 
 		return this.number.getValue()> max || this.number.getValue()< min;
 	}
 
+	/**
+	 * get the rang of number
+	 * @return a string that show the range
+	 */
 	public String getRange() {
 
 		return "[" + min+ ", "+max+"]";

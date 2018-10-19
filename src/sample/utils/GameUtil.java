@@ -5,6 +5,9 @@ import sample.model.Player;
 
 import java.util.*;
 
+/**
+ * GameUtil class
+ */
 public class GameUtil {
 
 	public static Map<Country,Integer> tempArmyDistributeMap = new HashMap<> ();
@@ -31,6 +34,7 @@ public class GameUtil {
 		return sortedArrayList;
 
 	}
+
 
 	private static void connectedCountryUtil(Country c, Set<Country> visited, Set<Country> available){
 
