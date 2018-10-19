@@ -15,7 +15,9 @@ import sample.utils.LoadUtil;
 
 import java.io.File;
 import java.io.IOException;
-
+/**
+ * This class is used to contral the front page.
+ */
 public class FrontPageController {
 
     private Scene game;
@@ -27,6 +29,13 @@ public class FrontPageController {
         this.game = scene;
     }
 
+	/**
+	 * This method is used to load the game map
+	 * 
+	 * @param in
+	 *            The event ActionEvent.
+	 * @throws IOException
+	 */
     public void loadMap(ActionEvent event) throws IOException {
 
         FileChooser fileChooser = new FileChooser();
@@ -72,7 +81,13 @@ public class FrontPageController {
             }
         }
     }
-
+	/**
+	 * This method is used to open the Game Scene
+	 * 
+	 * @param in
+	 *            The actionEvent ActionEvent.
+	 * @throws IOException
+	 */
     private void openGameScene(ActionEvent actionEvent) throws IOException {
 
         Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -82,12 +97,20 @@ public class FrontPageController {
         primaryStage.setScene(game);
 
     }
+	/**
+	 * This method is used to load the progress of the game
+	 */
 
     public void loadProgress() {
 
 
     }
-
+	/**
+	 * This method is used to exit the Game Scene
+	 * 
+	 * @param in
+	 *            The actionEvent ActionEvent.
+	 */
     public void exit(ActionEvent event) {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -95,7 +118,12 @@ public class FrontPageController {
         stage.close();
 
     }
-
+	/**
+	 * This method is to set the Main
+	 * 
+	 * @param in
+	 *            Main main
+	 */
     public void setMain(Main main) {
         this.main = main;
     }
