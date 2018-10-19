@@ -11,6 +11,13 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Stream;
 
+/**
+ * LoadUtil class manages the reading and writing map information from or to a .map file.
+ * It also provides a format checking when reading a .map file to ensure the information can
+ * be correctly loaded into the map editor.
+ *
+ */
+
 public class LoadUtil {
     
     private static String label = "";
@@ -22,32 +29,56 @@ public class LoadUtil {
     private static int w = 0;
 
     private static int h =0 ;
-
+    
+    /**
+     * Method to get the Continent according to the name
+     * @param name  name is the continent we want to get
+     * @return continent
+     */
     private static Continent getContinent(String name){
 
        return continentMap.get(name);
     }
-
+    
+    /**
+     * Method to get the Continents
+     * @return ArrayList an list of continentMap.
+     */
     private static List<Continent> getAllContinents(){
 
         return new ArrayList<>(continentMap.values());
     }
 
+    /**
+     * Method to add a new Continent to the continentMap
+     * @param continent a new continent we want to add
+     */
     private static void addContinent(Continent continent){
 
         continentMap.put(continent.getName(),continent);
     }
 
+    /**
+     * Method to get the all the Country
+     * @return ArrayList an list of countryMap.
+     */
     private static List<Country> getAllCountry(){
 
         return new ArrayList<>( countryMap.values());
     }
 
+    /**
+     * Method to get the Country according to the name
+     * @return list an instance of Country.
+     */
     private static Country getCountry(String name){
 
         return countryMap.get(name);
     }
 
+    /**
+     * Method to add a new country to the continentMap
+     */
     private static void addCountry(Country country){
 
         countryMap.put(country.getName(),country);
@@ -57,6 +88,9 @@ public class LoadUtil {
 
     }
 
+    /**
+     * Method to validate every country and their adjacent countries.
+     */
     private static void validateCountry(){
 
         Country country = countryMap.values().stream().filter(i-> i.getCoordinator()==null)
@@ -75,6 +109,14 @@ public class LoadUtil {
         });
     }
 
+    
+    /**
+     * Method to read a .map file and store all information to an instance of RiskMap and check
+     * correctness of every information.
+     * @param file is the file to be read.
+     * @return an instance of RiskMap.
+     * @throws IOException if encounters IO error.
+     */
     public static void readFile(File file) throws IOException {
 
         GameMap map = GameMap.getInstance();
@@ -217,5 +259,76 @@ public class LoadUtil {
 
         map.setCoordinator(new Coordinator(w,h));
     }
+    
+    /**
+     * Method to save a .map file
+     * @param file is the file to be save.
+     * @return bState true means successfully saved, false means save failed.
+     * @throws IOException if encounters IO error.
+     */
+    public static boolean saveFile(String PathOut) throws IOException {
+
+        boolean bState = false;
+
+        GameMap map = GameMap.getInstance();
+
+        FileWriter fw;
+
+        BufferedWriter bufw;
+        try {
+            fw = new FileWriter(PathOut);
+            bufw = new BufferedWriter(fw);
+
+            bufw.write("[Map]" + "\n");
+            bufw.write("author=" + map.getAuthor() + "\n");
+            bufw.write("warn=" + map.getWarn() + "\n");
+            bufw.write("image=" + map.getImage() + "\n");
+            bufw.write("wrap=" + map.getWarn() + "\n");
+            bufw.write("scroll=" + map.getScroll() + "\n");
+            bufw.write("\n");
+
+            List<Continent> continents = map.getContinents();
+            bufw.write("[continents]" + "\n");
+            for (int i = 0; i < continents.size(); i++) {
+                bufw.write(continents.get(i).getName() + "=" + continents.get(i).getArmy() + "\n");
+            }
+            bufw.write("\n");
+
+            bufw.write("[Territories]" + "\n");
+            List<Country> territories = map.getTerritories();
+            LinkedList<String> str = new LinkedList<String>();
+            for (int i = 0; i < territories.size(); i++) {
+                Country country = territories.get(i);
+                List<Country> AdjacentCountry = country.getAdjacentCountry();
+                String strAdjacentCountry = "";
+                for (int j = 0; j < AdjacentCountry.size(); j++) {
+                    strAdjacentCountry += "," + AdjacentCountry.get(j).getName();
+                }
+                str.add(country.getName() + "," + country.getCoordinator().getX() + "," + country.getCoordinator().getY() + ","
+                        + country.getContinent().getName() + strAdjacentCountry);
+            }
+
+
+            for (int j = 0; j < continents.size(); j++) {
+                String Strcontinents = continents.get(j).getName();
+                for (int i = 0; i < str.size(); i++) {
+                    if(str.get(i).contains(Strcontinents)) {
+                        bufw.write(str.get(i)+"\n");
+                    }
+
+                    bufw.flush();
+                }
+                bufw.write("\n");
+
+            }
+
+            bState = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            bState = false;
+        }
+        return bState;
+    }
+    
 
 }
