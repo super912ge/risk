@@ -1,10 +1,13 @@
 package sample.gamePage.status;
+
 import javafx.fxml.FXMLLoader;
+import sample.GameStatus;
 import sample.gamePage.status.phaseOne.PhaseOne;
-import sample.gamePage.status.phaseThree.PhaseStatusThree;
-import sample.gamePage.status.phaseTwo.PhaseStatusTwo;
+import sample.gamePage.status.phaseThree.PhaseThree;
+import sample.gamePage.status.phaseTwo.PhaseTwo;
+import sample.gamePage.status.preGame.PreGame;
+
 import java.io.IOException;
-import java.security.InvalidParameterException;
 
 /*
 
@@ -13,16 +16,25 @@ import java.security.InvalidParameterException;
  */
 public class PhaseController {
 
+
+    private PreGame preGame;
+
     private PhaseOne phaseOne;
 
-    private PhaseStatusTwo phaseTwo;
+    private PhaseTwo phaseTwo;
 
-    private PhaseStatusThree phaseThree;
+    private PhaseThree phaseThree;
 
 
-    public PhaseController () throws IOException {
+    public PhaseController() throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("./phaseOne/PhaseOne.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("./preGame/PreGame.fxml"));
+
+        loader.load();
+
+        preGame = loader.getController();
+
+        loader = new FXMLLoader(this.getClass().getResource("./phaseOne/PhaseOne.fxml"));
 
         loader.load();
 
@@ -42,15 +54,26 @@ public class PhaseController {
     }
 
 
-    public PhaseStatus getPhase(int i){
+    public PhaseStatus getPhase() {
 
-        if (i==1) return phaseOne;
+        if (!GameStatus.getInstance().isStart()) {
 
-        if (i==2) return phaseTwo;
+            return preGame;
+        }
 
-        if (i==3) return phaseThree;
+        switch (GameStatus.getInstance().getPhase()) {
 
-        else throw new InvalidParameterException();
+            case 1:
+                return phaseOne;
+
+            case 2:
+                return phaseTwo;
+
+            case 3:
+                return phaseThree;
+        }
+
+        return null;
     }
 
 }

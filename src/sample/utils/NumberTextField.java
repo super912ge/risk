@@ -2,10 +2,7 @@ package sample.utils;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.TextField;
 
 import java.text.NumberFormat;
@@ -13,89 +10,110 @@ import java.text.ParseException;
 
 public class NumberTextField extends TextField {
 
-	private final NumberFormat nf;
+    private final NumberFormat nf;
 
-	private ObjectProperty<Integer> number = new SimpleObjectProperty<> ();
+    private int min = 0;
 
-	public final Integer getNumber () {
+    private int max = Integer.MAX_VALUE;
 
-		return number.get ();
-	}
+    private ObjectProperty<Integer> number = new SimpleObjectProperty<>();
 
-	public final void setNumber (Integer value) {
+    public NumberTextField() {
 
-		number.set (value);
-	}
+        this(0);
+    }
 
-	public ObjectProperty<Integer> numberProperty () {
+    private NumberTextField(Integer value) {
 
-		return number;
-	}
+        this(value, NumberFormat.getInstance());
 
-	public NumberTextField () {
+        initHandlers();
+    }
 
-		this (0);
-	}
+    private NumberTextField(Integer value, NumberFormat nf) {
 
-	public NumberTextField (Integer value) {
+        super();
 
-		this (value, NumberFormat.getInstance ());
-		initHandlers ();
-	}
+        this.nf = nf;
 
-	public NumberTextField (Integer value, NumberFormat nf) {
+        initHandlers();
 
-		super ();
-		this.nf = nf;
-		initHandlers ();
-		setNumber (value);
-	}
+        setNumber(value);
+    }
 
-	private void initHandlers () {
+    public final Integer getNumber() {
 
-		// try to parse when focus is lost or RETURN is hit
-		setOnAction ((ActionEvent e)->parseAndFormatInput ());
+        return number.get();
+    }
 
-		focusedProperty ().addListener (new ChangeListener<Boolean> () {
+    public final void setNumber(Integer value) {
 
-			@Override
-			public void changed (ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 
-				if (! newValue) {
-					parseAndFormatInput ();
-				}
-			}
-		});
+        number.set(value);
+    }
 
-		// Set text in field if Integer property is changed from outside.
-		numberProperty ().addListener (new ChangeListener<Integer> () {
+    private ObjectProperty<Integer> numberProperty() {
 
-			@Override
-			public void changed (ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
+        return number;
+    }
 
-				setText (nf.format (newValue));
-			}
-		});
-	}
+    private void initHandlers() {
 
-	/**
-	 * Tries to parse the user input to a number according to the provided
-	 * NumberFormat
-	 */
-	private void parseAndFormatInput () {
+        // try to parse when focus is lost or RETURN is hit
+        setOnAction((ActionEvent e) -> parseAndFormatInput());
 
-		try {
-			String input = getText ();
-			if (input == null || input.length () == 0) {
-				return;
-			}
-			Number parsedNumber = nf.parse (input);
-			Integer newValue = new Integer (parsedNumber.toString ());
-			setNumber (newValue);
-			selectAll ();
-		} catch (ParseException ex) {
-			// If parsing fails keep old number
-			setText (nf.format (number.get ()));
-		}
-	}
+        focusedProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (!newValue) parseAndFormatInput();
+        });
+
+        // Set text in field if Integer property is changed from outside.
+        numberProperty().addListener((observable, oldValue, newValue) -> setText(nf.format(newValue)));
+    }
+
+    /**
+     * Tries to parse the user input to a number according to the provided
+     * NumberFormat
+     */
+    private void parseAndFormatInput() {
+
+        try {
+
+            String input = getText();
+
+            if (input == null || input.length() == 0) {
+                return;
+            }
+
+            Number parsedNumber = nf.parse(input);
+
+            Integer newValue = new Integer(parsedNumber.toString());
+
+            setNumber(newValue);
+
+            selectAll();
+
+        } catch (ParseException ex) {
+
+            setText(null);
+
+        }
+    }
+
+    public void setRange(int min, int max) {
+
+        this.min = min;
+
+        this.max = max;
+    }
+
+    public boolean isOutRange() {
+
+        return this.number.getValue() > max || this.number.getValue() < min;
+    }
+
+    public String getRange() {
+
+        return "[" + min + ", " + max + "]";
+    }
 }

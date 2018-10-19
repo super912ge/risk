@@ -9,6 +9,7 @@ import java.util.List;
 public class GameMap {
 
     private static final GameMap instance = new GameMap();
+  
     /**
 	 * The method of class GameMap to  get instance
 	 * @return instance
@@ -18,21 +19,14 @@ public class GameMap {
     }
 
     private File image;
-
     private Coordinator coordinator;
-
     private Boolean wrap;
-
     private String author;
-
     private String scroll;
-
     private Boolean warn;
-
     private List<Continent> continents;
-
     private List<Country> territories;
-    
+
     /**
 	 * The method of class GameMap to  get image
 	 * @return image
