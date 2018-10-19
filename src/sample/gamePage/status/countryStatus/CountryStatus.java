@@ -16,7 +16,10 @@ import sample.utils.NumberTextField;
 
 import java.io.IOException;
 import java.util.stream.Collectors;
-
+   /**
+	 * This is class for describe country status
+	 * 
+	 */
 public class CountryStatus {
 
     @FXML
@@ -51,7 +54,10 @@ public class CountryStatus {
 
     private MoveArmy moveArmy;
 
-
+    /**
+	 * This method place army
+	 * 
+	 */
     public void placeArmy() {
 
         if (numberTextField.isOutRange()) {
@@ -97,12 +103,18 @@ public class CountryStatus {
             }
         }
     }
-
+    /**
+	 * This method is setUp GamePage
+	 * @ param GamePage
+	 */
     public void setGamePage(GamePage gamePage) {
 
         this.gamePage = gamePage;
     }
-
+    /**
+	 * This method is update the status of the country status
+	 * @throws IOException
+	 */
     private void update() throws IOException {
 
         Player current = GameStatus.getInstance().getCurrentPlayer();
@@ -161,6 +173,9 @@ public class CountryStatus {
                     selectedCountry.getArmy() > 1);
         }
     }
+    /**
+	 * This method is update status
+	 */
 
     private void updateArmy() {
 
@@ -175,18 +190,34 @@ public class CountryStatus {
             e.printStackTrace();
         }
     }
-
+    /**
+	 * This method is set the selected country
+	 * 
+	 * @param in
+	 *           Country selectedCountry
+	 * @throws IOException
+	 */
     public void setSelectedCountry(Country selectedCountry) throws IOException {
 
         this.selectedCountry = selectedCountry;
 
         update();
     }
+    /**
+	 * This method is get the status pane of the Country 
+	 * 
+	 * @return
+	 *           countryStatusPane.
+	 */
 
     public SplitPane getCountryStatusPane() {
 
         return countryStatusPane;
     }
+    /**
+	 * This method is for canceling
+	 * 
+	 */
 
     public void cancel() {
 
