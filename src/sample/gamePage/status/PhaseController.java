@@ -1,23 +1,40 @@
 package sample.gamePage.status;
+
 import javafx.fxml.FXMLLoader;
+import sample.GameStatus;
 import sample.gamePage.status.phaseOne.PhaseOne;
 import sample.gamePage.status.phaseThree.PhaseThree;
 import sample.gamePage.status.phaseTwo.PhaseTwo;
-import java.io.IOException;
-import java.security.InvalidParameterException;
+import sample.gamePage.status.preGame.PreGame;
 
+import java.io.IOException;
+
+/*
+
+ Switch between different game phase by loading different fxml file and return the controller.
+
+ */
 public class PhaseController {
 
-    private  PhaseOne phaseOne;
 
-    private  PhaseTwo phaseTwo;
+    private PreGame preGame;
 
-    private  PhaseThree phaseThree;
+    private PhaseOne phaseOne;
+
+    private PhaseTwo phaseTwo;
+
+    private PhaseThree phaseThree;
 
 
-    public PhaseController () throws IOException {
+    public PhaseController() throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("./phaseOne/PhaseOne.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("./preGame/PreGame.fxml"));
+
+        loader.load();
+
+        preGame = loader.getController();
+
+        loader = new FXMLLoader(this.getClass().getResource("./phaseOne/PhaseOne.fxml"));
 
         loader.load();
 
@@ -37,15 +54,26 @@ public class PhaseController {
     }
 
 
-    public StatusPhase getPhase(int i){
+    public PhaseStatus getPhase() {
 
-        if (i==1) return phaseOne;
+        if (!GameStatus.getInstance().isStart()) {
 
-        if (i==2) return phaseTwo;
+            return preGame;
+        }
 
-        if (i==3) return phaseThree;
+        switch (GameStatus.getInstance().getPhase()) {
 
-        else throw new InvalidParameterException();
+            case 1:
+                return phaseOne;
+
+            case 2:
+                return phaseTwo;
+
+            case 3:
+                return phaseThree;
+        }
+
+        return null;
     }
 
 }
