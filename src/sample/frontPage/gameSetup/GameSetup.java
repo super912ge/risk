@@ -14,6 +14,10 @@ import sample.model.Player;
 import sample.utils.NumberTextField;
 
 import java.util.HashSet;
+   /**
+	 * This method is set up Game
+	 * 
+	 */
 
 public class GameSetup {
 
@@ -28,6 +32,10 @@ public class GameSetup {
     private NumberTextField numberTextField;
 
     @FXML
+    /**
+	 * This method is for initializatioon
+	 * 
+	 */
     public void initialize() {
 
         try {
@@ -54,7 +62,12 @@ public class GameSetup {
 
         setupPane.getChildren().addAll(label, numberTextField);
     }
-
+   /**
+	 * This method is used to confirm the event
+	 * 
+	 * @param in
+	 *            The actionEvent ActionEvent.
+	 */
     @FXML
     public void confirm(ActionEvent event) {
 
@@ -94,6 +107,12 @@ public class GameSetup {
             stage.close();
         }
     }
+   /**
+	 * This method is used to cancel the event
+	 * 
+	 * @param in
+	 *            The actionEvent ActionEvent.
+	 */
 
     public void cancel(ActionEvent event) {
 
