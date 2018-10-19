@@ -13,13 +13,16 @@ public class Main extends Application {
     private Stage stage;
 
 
-
     private FrontPageController frontPageController;
 
     private GamePage gamePageController;
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
 
         this.stage = primaryStage;
 
@@ -27,9 +30,9 @@ public class Main extends Application {
 
     }
 
-    private void mainWindow(){
+    private void mainWindow() {
 
-        try{
+        try {
 
             stage.setResizable(true);
 
@@ -69,7 +72,7 @@ public class Main extends Application {
 
             stage.show();
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             e.printStackTrace();
         }
@@ -89,9 +92,5 @@ public class Main extends Application {
 
     public void setGamePageController(GamePage gamePageController) {
         this.gamePageController = gamePageController;
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

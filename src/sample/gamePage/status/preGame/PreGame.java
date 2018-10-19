@@ -11,103 +11,101 @@ import sample.gamePage.status.PhaseStatus;
 import sample.model.Country;
 import sample.model.Player;
 import sample.utils.GameUtil;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class PreGame extends PhaseStatus {
 
-	@FXML
-	private AnchorPane pane;
+    @FXML
+    private AnchorPane pane;
 
-	@FXML
-	private TextFlow status;
+    @FXML
+    private TextFlow status;
 
-	@FXML
-	private TextField input;
+    @FXML
+    private TextField input;
 
-	private Player player;
+    private Player player;
 
-	@FXML
-	private Button confirm;
+    @FXML
+    private Button confirm;
 
 
-	public void init(){
+    public void init() {
 
-		player = GameStatus.getInstance ().getCurrentPlayer ();
+        player = GameStatus.getInstance().getCurrentPlayer();
 
-		GameUtil.initTempMap(player);
+        GameUtil.initTempMap(player);
 
-		confirm.setDisable (player.getArmy() != player.getSpentArmy());
+        confirm.setDisable(player.getArmy() != player.getSpentArmy());
 
-		setContent ();
-	}
+        setContent();
+    }
 
-	public AnchorPane getPane(){
+    public AnchorPane getPane() {
 
-		return pane;
-	}
+        return pane;
+    }
 
-	public void confirm(){
+    public void confirm() {
 
-		player.setUsername (input.getText().trim ());
+        player.setUsername(input.getText().trim());
 
-		input.setText ("");
+        input.setText("");
 
-		player.getTerritory().clear();
+        player.getTerritory().clear();
 
-		player.getTerritory().addAll(GameUtil.getFinalCountry());
+        player.getTerritory().addAll(GameUtil.getFinalCountry());
 
-		player.setArmy(0);
+        player.setArmy(0);
 
-		player.setSpentArmy(0);
+        player.setSpentArmy(0);
 
-		GameStatus.getInstance ().nextPlayer ();
+        GameStatus.getInstance().nextPlayer();
 
-		if (!GameStatus.getInstance ().isStart ()) {
+        if (!GameStatus.getInstance().isStart()) {
 
-			update();
+            update();
 
-			super.getGamePage().updatePlayer();
-		}
+            super.getGamePage().updatePlayer();
+        } else super.getGamePage().updatePhaseStatus();
 
-		else super.getGamePage().updatePhaseStatus();
+    }
 
-	}
+    public void reset() {
 
-	public void reset() {
+        GameUtil.initTempMap(player);
 
-		GameUtil.initTempMap (player);
+        input.setText("");
 
-		input.setText ("");
+        player.setSpentArmy(player.getTerritory().size());
 
-		player.setSpentArmy (player.getTerritory ().size ());
+        update();
+    }
 
-		update ();
-	}
+    public void update() {
 
-	public void update(){
+        player = GameStatus.getInstance().getCurrentPlayer();
 
-		player = GameStatus.getInstance ().getCurrentPlayer ();
+        this.confirm.setDisable(player.getArmy() != player.getSpentArmy());
 
-		this.confirm.setDisable(player.getArmy() != player.getSpentArmy());
+        setContent();
+    }
 
-		setContent ();
-	}
+    private void setContent() {
 
-	private void setContent(){
+        List<Text> textList = new ArrayList<>();
 
-		List<Text> textList = new ArrayList<> ();
+        for (Country country : player.getTerritory()) {
 
-		for (Country country : player.getTerritory ()){
+            Text text = new Text(country.getName() + ": " + GameUtil.tempArmyDistributeMap.get(country) + "   ");
 
-			Text text = new Text (country.getName ()+ ": "+ GameUtil.tempArmyDistributeMap.get (country)+"   ");
+            textList.add(text);
+        }
 
-			textList.add (text);
-		}
+        status.getChildren().clear();
 
-		status.getChildren ().clear();
-
-		status.getChildren().addAll (textList);
-	}
+        status.getChildren().addAll(textList);
+    }
 }

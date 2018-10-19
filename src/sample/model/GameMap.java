@@ -6,26 +6,18 @@ import java.util.List;
 public class GameMap {
 
     private static final GameMap instance = new GameMap();
+    private File image;
+    private Coordinator coordinator;
+    private Boolean wrap;
+    private String author;
+    private String scroll;
+    private Boolean warn;
+    private List<Continent> continents;
+    private List<Country> territories;
 
     public static GameMap getInstance() {
         return instance;
     }
-
-    private File image;
-
-    private Coordinator coordinator;
-
-    private Boolean wrap;
-
-    private String author;
-
-    private String scroll;
-
-    private Boolean warn;
-
-    private List<Continent> continents;
-
-    private List<Country> territories;
 
     public File getImage() {
         return image;

@@ -44,24 +44,24 @@ public class PhaseThree extends PhaseStatus {
 
         player = GameStatus.getInstance().getCurrentPlayer();
 
-        stage.setText(GameStatus.getInstance().getPhase()+"");
+        stage.setText(GameStatus.getInstance().getPhase() + "");
 
         setContent();
     }
 
-    private void setContent(){
+    private void setContent() {
 
         List<Text> textList = new ArrayList<>();
 
-        for (Country country : player.getTerritory ()){
+        for (Country country : player.getTerritory()) {
 
-            Text text = new Text (country.getName ()+ ": "+ GameUtil.tempArmyDistributeMap.get (country)+"   ");
+            Text text = new Text(country.getName() + ": " + GameUtil.tempArmyDistributeMap.get(country) + "   ");
 
-            textList.add (text);
+            textList.add(text);
         }
 
-        territory.getChildren ().clear();
+        territory.getChildren().clear();
 
-        territory.getChildren().addAll (textList);
-    };
+        territory.getChildren().addAll(textList);
+    }
 }

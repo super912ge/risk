@@ -19,7 +19,7 @@ public class MoveArmy {
     void setFrom(Country from) {
 
         options.setItems(FXCollections.observableArrayList(
-                GameUtil.findAllConnectedCountry(GameStatus.getInstance().getCurrentPlayer(),from)));
+                GameUtil.findAllConnectedCountry(GameStatus.getInstance().getCurrentPlayer(), from)));
     }
 
     AnchorPane getMoveArmy() {
@@ -27,7 +27,7 @@ public class MoveArmy {
         return moveArmy;
     }
 
-    Country getSelected(){
+    Country getSelected() {
 
         return options.getValue();
     }

@@ -1,7 +1,6 @@
 package sample.gamePage.status.phaseOne;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -46,7 +45,7 @@ public class PhaseOne extends PhaseStatus {
 
         continent.getChildren().add(new Text(currentPlayer.getContinentString()));
 
-        stage.setText(""+GameStatus.getInstance().getPhase());
+        stage.setText("" + GameStatus.getInstance().getPhase());
 
         log.setText("Received " + currentPlayer.getArmy() + " new army, please select a country to place your army.");
 
@@ -57,13 +56,13 @@ public class PhaseOne extends PhaseStatus {
 
 
     @Override
-    public void update(){
+    public void update() {
 
-       log.setText("");
+        log.setText("");
 
         setContent();
 
-        if (currentPlayer.getArmy()==currentPlayer.getSpentArmy()){
+        if (currentPlayer.getArmy() == currentPlayer.getSpentArmy()) {
 
             currentPlayer.getTerritory().clear();
 
@@ -79,19 +78,19 @@ public class PhaseOne extends PhaseStatus {
         }
     }
 
-    private void setContent(){
+    private void setContent() {
 
         List<Text> textList = new ArrayList<>();
 
-        for (Country country : currentPlayer.getTerritory ()){
+        for (Country country : currentPlayer.getTerritory()) {
 
-            Text text = new Text (country.getName ()+ ": "+ GameUtil.tempArmyDistributeMap.get (country)+"   ");
+            Text text = new Text(country.getName() + ": " + GameUtil.tempArmyDistributeMap.get(country) + "   ");
 
-            textList.add (text);
+            textList.add(text);
         }
 
-        territory.getChildren ().clear();
+        territory.getChildren().clear();
 
-        territory.getChildren().addAll (textList);
+        territory.getChildren().addAll(textList);
     }
 }

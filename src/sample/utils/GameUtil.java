@@ -7,74 +7,72 @@ import java.util.*;
 
 public class GameUtil {
 
-	public static Map<Country,Integer> tempArmyDistributeMap = new HashMap<> ();
+    public static Map<Country, Integer> tempArmyDistributeMap = new HashMap<>();
 
-	public static List<Country> findAllConnectedCountry(Player player, Country country){
+    public static List<Country> findAllConnectedCountry(Player player, Country country) {
 
-		Set<Country> validOptions = new HashSet<> ();
+        Set<Country> validOptions = new HashSet<>();
 
-		connectedCountryUtil (country,validOptions,player.getTerritory ());
+        connectedCountryUtil(country, validOptions, player.getTerritory());
 
-		List<Country> sortedArrayList = new ArrayList<> (validOptions);
+        List<Country> sortedArrayList = new ArrayList<>(validOptions);
 
-		sortedArrayList.sort ((i,j)->{
+        sortedArrayList.sort((i, j) -> {
 
-			if (!i.getContinent ().equals (j.getContinent ())) {
+            if (!i.getContinent().equals(j.getContinent())) {
 
-				return i.getContinent ().getName ().compareTo (j.getContinent ().getName ());
-			}
+                return i.getContinent().getName().compareTo(j.getContinent().getName());
+            } else return i.getName().compareTo(j.getName());
 
-			else return i.getName ().compareTo (j.getName ());
+        });
 
-		});
+        return sortedArrayList;
 
-		return sortedArrayList;
+    }
 
-	}
+    public static Set<Country> getFinalCountry() {
 
-	public static Set<Country> getFinalCountry(){
+        for (Map.Entry<Country, Integer> entry : tempArmyDistributeMap.entrySet()) {
 
-		for (Map.Entry<Country,Integer> entry: tempArmyDistributeMap.entrySet()){
+            entry.getKey().setArmy(entry.getValue());
+        }
 
-			entry.getKey().setArmy(entry.getValue());
-		}
+        return tempArmyDistributeMap.keySet();
+    }
 
-		return tempArmyDistributeMap.keySet();
-	}
+    private static void connectedCountryUtil(Country c, Set<Country> visited, Set<Country> available) {
 
-	private static void connectedCountryUtil(Country c, Set<Country> visited, Set<Country> available){
+        for (Country country : c.getAdjacentCountry()) {
 
-		for (Country country: c.getAdjacentCountry ()){
+            if (!visited.contains(c) && available.contains(c)) {
 
-			if (!visited.contains (c) && available.contains (c)){
+                visited.add(country);
 
-				visited.add (country);
+                connectedCountryUtil(country, visited, available);
+            }
+        }
+    }
 
-				connectedCountryUtil (country, visited, available);
-			}
-		}
-	}
+    public static void tempDistributeArmy(Country country, int army) {
 
-	public static void tempDistributeArmy(Country country, int army) {
+        tempArmyDistributeMap.computeIfPresent(country, (k, v) -> v += army);
 
-		tempArmyDistributeMap.computeIfPresent(country, (k,v)-> v += army);
+    }
 
-	}
+    public static void resetTempMap() {
 
-	public static void resetTempMap(){
+        tempArmyDistributeMap.clear();
+    }
 
-		tempArmyDistributeMap.clear ();
-	}
+    public static void initTempMap(Player player) {
 
-	public static void initTempMap(Player player) {
+        resetTempMap();
 
-		resetTempMap ();
+        player.getTerritory().forEach(c -> tempArmyDistributeMap.put(c, c.getArmy()));
+    }
 
-		player.getTerritory ().forEach (c -> tempArmyDistributeMap.put (c,c.getArmy ()));
-	}
+    public static int getDistributedArmy() {
 
-	public static int getDistributedArmy(){
-
-		return tempArmyDistributeMap.values().stream().mapToInt(i->i).sum();
-	}
+        return tempArmyDistributeMap.values().stream().mapToInt(i -> i).sum();
+    }
 }

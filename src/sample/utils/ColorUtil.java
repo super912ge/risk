@@ -25,34 +25,33 @@ public class ColorUtil {
     };
 
 
+    private static final Color[] playerColor = {
 
-	private static final Color[] playerColor = {
+            Color.ORANGE,
 
-			Color.ORANGE,
+            Color.RED,
 
-			Color.RED,
+            Color.YELLOW,
 
-			Color.YELLOW,
+            Color.GREEN,
 
-			Color.GREEN,
+            Color.BLUE,
 
-			Color.BLUE,
+            Color.PURPLE
+    };
 
-			Color.PURPLE
-	};
+    public static Color getContinentColor(int a) {
 
-    public static Color getContinentColor(int a){
-
-        if (a>=0 && a<continentColor.length) return continentColor[a];
+        if (a >= 0 && a < continentColor.length) return continentColor[a];
 
         else return null;
     }
 
 
-	public static Color getPlayerColor(int a){
+    public static Color getPlayerColor(int a) {
 
-		if  ( a >=0 && a < playerColor.length) return continentColor[a];
+        if (a >= 0 && a < playerColor.length) return continentColor[a];
 
-		else return null;
-	}
+        else return null;
+    }
 }

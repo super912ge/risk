@@ -11,7 +11,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import sample.Main;
 import sample.utils.LoadUtil;
-import java.io.*;
+
+import java.io.File;
+import java.io.IOException;
 
 public class FrontPageController {
 
@@ -19,7 +21,7 @@ public class FrontPageController {
 
     private Main main;
 
-    public void setGame(Scene scene){
+    public void setGame(Scene scene) {
 
         this.game = scene;
     }
@@ -30,18 +32,18 @@ public class FrontPageController {
 
         fileChooser.setTitle("Select GameMap File To Load");
 
-        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("map file","*.map"));
+        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("map file", "*.map"));
 
-        File selected = fileChooser.showOpenDialog( null);
+        File selected = fileChooser.showOpenDialog(null);
 
-        if (selected!=null) {
+        if (selected != null) {
 
             try {
 
-                 LoadUtil.readFile(selected);
+                LoadUtil.readFile(selected);
 
 
-            } catch (Exception e){
+            } catch (Exception e) {
 
                 e.printStackTrace();
 
@@ -69,7 +71,7 @@ public class FrontPageController {
 
     private void openGameScene(ActionEvent actionEvent) throws IOException {
 
-        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
 
         main.getGamePageController().renderMap();
 
@@ -77,14 +79,14 @@ public class FrontPageController {
 
     }
 
-    public void loadProgress(){
+    public void loadProgress() {
 
 
     }
 
-    public void exit(ActionEvent event){
+    public void exit(ActionEvent event) {
 
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         stage.close();
 

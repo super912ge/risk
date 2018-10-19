@@ -1,6 +1,5 @@
 package sample.frontPage.gameSetup;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -10,35 +9,28 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import sample.GameStatus;
-import sample.model.Country;
 import sample.model.GameMap;
 import sample.model.Player;
 import sample.utils.NumberTextField;
 
 import java.util.HashSet;
-import java.util.Set;
 
 public class GameSetup {
 
+    private static final int[] initialArmy = {35, 30, 25, 20};
     @FXML
     private AnchorPane setupPane;
-
     @FXML
     private Button confirm;
-
-
     private NumberTextField numberTextField;
 
-
-    private static final int [] initialArmy = {35,30,25,20};
-
     @FXML
-    public void initialize(){
+    public void initialize() {
 
         try {
             numberTextField = new NumberTextField();
 
-            numberTextField.setRange(3,6);
+            numberTextField.setRange(3, 6);
 
         } catch (IllegalArgumentException e) {
 
@@ -47,31 +39,29 @@ public class GameSetup {
 
         Label label = new Label("Number of players: ");
 
-        AnchorPane.setLeftAnchor(label,10.0);
+        AnchorPane.setLeftAnchor(label, 10.0);
 
         AnchorPane.setTopAnchor(label, 40.0);
 
-        AnchorPane.setTopAnchor(numberTextField,60.0);
+        AnchorPane.setTopAnchor(numberTextField, 60.0);
 
-        AnchorPane.setLeftAnchor(numberTextField,60.0);
+        AnchorPane.setLeftAnchor(numberTextField, 60.0);
 
-        setupPane.getChildren().addAll(label,numberTextField);
+        setupPane.getChildren().addAll(label, numberTextField);
     }
 
     @FXML
-    public void confirm(ActionEvent event){
+    public void confirm(ActionEvent event) {
 
 
         if (numberTextField.isOutRange()) {
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
 
-            alert.setContentText( numberTextField.getNumber() +" is invalid, please enter number between "+numberTextField.getRange());
+            alert.setContentText(numberTextField.getNumber() + " is invalid, please enter number between " + numberTextField.getRange());
 
             alert.show();
-        }
-
-        else {
+        } else {
 
             GameStatus.getInstance().reset();
 
@@ -98,10 +88,11 @@ public class GameSetup {
             stage.close();
         }
     }
-    @FXML
-    public void cancel(ActionEvent event){
 
-        Stage stage = (Stage) ((Node)event.getSource()).getParent().getScene().getWindow();
+    @FXML
+    public void cancel(ActionEvent event) {
+
+        Stage stage = (Stage) ((Node) event.getSource()).getParent().getScene().getWindow();
 
         stage.close();
     }
