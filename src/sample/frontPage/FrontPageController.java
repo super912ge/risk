@@ -9,6 +9,7 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import sample.GameStatus;
 import sample.Main;
 import sample.utils.LoadUtil;
 
@@ -65,7 +66,10 @@ public class FrontPageController {
 
             alert.showAndWait();
 
-            openGameScene(event);
+            if (GameStatus.getInstance ().getPlayers()!=null&&!GameStatus.getInstance ().getPlayers ().isEmpty ()) {
+
+	            openGameScene (event);
+            }
         }
     }
 

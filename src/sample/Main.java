@@ -12,7 +12,6 @@ public class Main extends Application {
 
     private Stage stage;
 
-
     private FrontPageController frontPageController;
 
     private GamePage gamePageController;
@@ -78,19 +77,9 @@ public class Main extends Application {
         }
     }
 
-    public FrontPageController getFrontPageController() {
-        return frontPageController;
-    }
-
-    public void setFrontPageController(FrontPageController frontPageController) {
-        this.frontPageController = frontPageController;
-    }
 
     public GamePage getGamePageController() {
         return gamePageController;
     }
 
-    public void setGamePageController(GamePage gamePageController) {
-        this.gamePageController = gamePageController;
-    }
 }

@@ -13,8 +13,8 @@
                     <items>
                         <MenuItem mnemonicParsing="false" text="New"/>
                         <MenuItem mnemonicParsing="false" text="Load"/>
-                        <MenuItem mnemonicParsing="false" text="Main Menu"/>
-                        <MenuItem fx:id="save" mnemonicParsing="false" text="Save"/>
+                        <MenuItem fx:id="mainMenu" mnemonicParsing="false" text="Main Menu" onAction="#goToMainMenu"/>
+                        <MenuItem fx:id="save" mnemonicParsing="false" text="Save" onAction="#save"/>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">

@@ -18,10 +18,13 @@ import java.util.HashSet;
 public class GameSetup {
 
     private static final int[] initialArmy = {35, 30, 25, 20};
+
     @FXML
     private AnchorPane setupPane;
+
     @FXML
     private Button confirm;
+
     private NumberTextField numberTextField;
 
     @FXML
@@ -43,9 +46,11 @@ public class GameSetup {
 
         AnchorPane.setTopAnchor(label, 40.0);
 
-        AnchorPane.setTopAnchor(numberTextField, 60.0);
+        numberTextField.setPrefWidth (30);
 
-        AnchorPane.setLeftAnchor(numberTextField, 60.0);
+        AnchorPane.setTopAnchor(numberTextField, 40.0);
+
+        AnchorPane.setLeftAnchor(numberTextField, 160.0);
 
         setupPane.getChildren().addAll(label, numberTextField);
     }
@@ -61,6 +66,7 @@ public class GameSetup {
             alert.setContentText(numberTextField.getNumber() + " is invalid, please enter number between " + numberTextField.getRange());
 
             alert.show();
+
         } else {
 
             GameStatus.getInstance().reset();
@@ -89,7 +95,6 @@ public class GameSetup {
         }
     }
 
-    @FXML
     public void cancel(ActionEvent event) {
 
         Stage stage = (Stage) ((Node) event.getSource()).getParent().getScene().getWindow();

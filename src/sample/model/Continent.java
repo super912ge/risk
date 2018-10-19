@@ -19,7 +19,7 @@ public class Continent {
      * Construction method with incoming parameters.
      *
      * @param name continent name with String type
-     * @param the  number of army can get after conquest the continent
+     * @param army  number of army can get after conquest the continent
      */
 
     public Continent(String name, int army) {
@@ -59,14 +59,14 @@ public class Continent {
      * @return army
      */
 
-    int getArmy() {
+    public int getArmy() {
         return army;
     }
 
     /**
      * To set the army
      *
-     * @param armys, the number of army with int type
+     * @param army, the number of army with int type
      */
     public void setArmy(int army) {
         this.army = army;

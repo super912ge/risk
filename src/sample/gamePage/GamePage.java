@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -23,6 +24,7 @@ import sample.model.Country;
 import sample.model.GameMap;
 import sample.model.Player;
 import sample.utils.ColorUtil;
+import sample.utils.LoadUtil;
 
 import java.io.IOException;
 
@@ -42,9 +44,9 @@ public class GamePage {
 
     @FXML
     private AnchorPane statusPane;
-
-    @FXML
-    private AnchorPane controlPane;
+    //
+    // @FXML
+    // private AnchorPane controlPane;
 
     private CountryStatus countryStatus;
 
@@ -62,17 +64,17 @@ public class GamePage {
         this.frontPage = scene;
     }
 
-    public void goToMainMenu(ActionEvent event) {
+    public void goToMainMenu() {
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) this.gameMapPane.getScene().getWindow();
 
         stage.setScene(frontPage);
 
     }
 
-    public void save() {
+    public void save() throws IOException {
 
-
+	    LoadUtil.saveFile ("save/");
     }
 
     public void updatePlayer() {

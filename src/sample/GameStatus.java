@@ -83,4 +83,9 @@ public class GameStatus {
     public void setCountryClicked(boolean countryClicked) {
         this.countryClicked = countryClicked;
     }
+
+	public List<Player> getPlayers () {
+
+		return players;
+	}
 }
