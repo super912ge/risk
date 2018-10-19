@@ -2,91 +2,90 @@ package sample;
 
 import sample.model.Player;
 import sample.utils.GameUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameStatus {
 
-	private static GameStatus instance = new GameStatus ();
+    private static GameStatus instance = new GameStatus();
+    private boolean countryClicked = false;
+    private List<Player> players;
+    private int phase = 1;
+    private int currentPlayerIndex = 0;
+    private boolean isStart = false;
 
-	public static GameStatus getInstance () {
+    public static GameStatus getInstance() {
 
-		return instance;
-	}
+        return instance;
+    }
 
-	private boolean countryClicked = false;
+    public int getPhase() {
 
-	private List<Player> players;
+        return phase;
+    }
 
-	private int phase = 1;
+    public void addPlayer(Player player) {
 
-	private int currentPlayerIndex = 0;
+        players.add(player);
+    }
 
-	private boolean isStart = false;
+    public Player getCurrentPlayer() {
 
-	public List<Player> getPlayers () { return players; }
+        return players.get(currentPlayerIndex);
+    }
 
-	public int getPhase () {
+    public void nextPlayer() {
 
-		return phase;
-	}
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
 
-	public void addPlayer (Player player) {
+        if (!isStart && currentPlayerIndex == 0) {
 
-		players.add (player);
-	}
+            isStart = true;
 
-	public Player getCurrentPlayer () {
+            getCurrentPlayer().gainArmy();
+        }
 
-		return players.get (currentPlayerIndex);
-	}
+        GameUtil.initTempMap(getCurrentPlayer());
+    }
 
-	public void nextPlayer () {
+    public void nextPhase() {
 
-		currentPlayerIndex = (currentPlayerIndex + 1) % players.size ();
+        phase = (phase + 1) % 4;
 
-		if (! isStart && currentPlayerIndex == 0) {
+        if (phase == 0) phase = 1;
 
-			isStart = true;
+        if (isStart && phase == 1) {
 
-			getCurrentPlayer().gainArmy();
-		}
+            nextPlayer();
 
-		GameUtil.initTempMap(getCurrentPlayer());
-	}
+            getCurrentPlayer().gainArmy();
+        }
+    }
 
-	public void nextPhase () {
+    public void reset() {
 
-		phase = (phase + 1) % 3;
+        phase = 1;
 
-		if (phase == 1) {
+        currentPlayerIndex = 0;
 
-			nextPlayer ();
+        players = new ArrayList<>();
+    }
 
-			getCurrentPlayer().gainArmy();
-		}
-	}
+    public boolean isStart() {
 
-	public void reset () {
+        return isStart;
+    }
 
-		phase = 1;
+    public boolean isCountryClicked() {
+        return countryClicked;
+    }
 
-		currentPlayerIndex = 0;
+    public void setCountryClicked(boolean countryClicked) {
+        this.countryClicked = countryClicked;
+    }
 
-		players = new ArrayList<> ();
-	}
+	public List<Player> getPlayers () {
 
-	public boolean isStart () {
-
-		return isStart;
-	}
-
-	public boolean isCountryClicked() {
-		return countryClicked;
-	}
-
-	public void setCountryClicked(boolean countryClicked) {
-		this.countryClicked = countryClicked;
+		return players;
 	}
 }

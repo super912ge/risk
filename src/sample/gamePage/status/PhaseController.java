@@ -1,6 +1,6 @@
 package sample.gamePage.status;
+
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.AnchorPane;
 import sample.GameStatus;
 import sample.gamePage.status.phaseOne.PhaseOne;
 import sample.gamePage.status.phaseThree.PhaseThree;
@@ -8,7 +8,6 @@ import sample.gamePage.status.phaseTwo.PhaseTwo;
 import sample.gamePage.status.preGame.PreGame;
 
 import java.io.IOException;
-import java.security.InvalidParameterException;
 
 /*
 
@@ -27,7 +26,7 @@ public class PhaseController {
     private PhaseThree phaseThree;
 
 
-    public PhaseController () throws IOException {
+    public PhaseController() throws IOException {
 
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("./preGame/PreGame.fxml"));
 
@@ -35,7 +34,7 @@ public class PhaseController {
 
         preGame = loader.getController();
 
-         loader = new FXMLLoader(this.getClass().getResource("./phaseOne/PhaseOne.fxml"));
+        loader = new FXMLLoader(this.getClass().getResource("./phaseOne/PhaseOne.fxml"));
 
         loader.load();
 
@@ -55,7 +54,7 @@ public class PhaseController {
     }
 
 
-    public PhaseStatus getPhase(){
+    public PhaseStatus getPhase() {
 
         if (!GameStatus.getInstance().isStart()) {
 
@@ -64,11 +63,14 @@ public class PhaseController {
 
         switch (GameStatus.getInstance().getPhase()) {
 
-            case 1: return phaseOne;
+            case 1:
+                return phaseOne;
 
-            case 2: return phaseTwo;
+            case 2:
+                return phaseTwo;
 
-            case 3: return phaseThree;
+            case 3:
+                return phaseThree;
         }
 
         return null;

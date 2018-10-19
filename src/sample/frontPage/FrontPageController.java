@@ -9,39 +9,51 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import sample.GameStatus;
 import sample.Main;
 import sample.utils.LoadUtil;
-import java.io.*;
 
+import java.io.File;
+import java.io.IOException;
+/**
+ * This class is used to contral the front page.
+ */
 public class FrontPageController {
 
     private Scene game;
 
     private Main main;
 
-    public void setGame(Scene scene){
+    public void setGame(Scene scene) {
 
         this.game = scene;
     }
 
+	/**
+	 * This method is used to load the game map
+	 * 
+	 * @param in
+	 *            The event ActionEvent.
+	 * @throws IOException
+	 */
     public void loadMap(ActionEvent event) throws IOException {
 
         FileChooser fileChooser = new FileChooser();
 
         fileChooser.setTitle("Select GameMap File To Load");
 
-        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("map file","*.map"));
+        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("map file", "*.map"));
 
-        File selected = fileChooser.showOpenDialog( null);
+        File selected = fileChooser.showOpenDialog(null);
 
-        if (selected!=null) {
+        if (selected != null) {
 
             try {
 
-                 LoadUtil.readFile(selected);
+                LoadUtil.readFile(selected);
 
 
-            } catch (Exception e){
+            } catch (Exception e) {
 
                 e.printStackTrace();
 
@@ -63,33 +75,55 @@ public class FrontPageController {
 
             alert.showAndWait();
 
-            openGameScene(event);
+            if (GameStatus.getInstance ().getPlayers()!=null&&!GameStatus.getInstance ().getPlayers ().isEmpty ()) {
+
+	            openGameScene (event);
+            }
         }
     }
-
+	/**
+	 * This method is used to open the Game Scene
+	 * 
+	 * @param in
+	 *            The actionEvent ActionEvent.
+	 * @throws IOException
+	 */
     private void openGameScene(ActionEvent actionEvent) throws IOException {
 
-        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Stage primaryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
 
         main.getGamePageController().renderMap();
 
         primaryStage.setScene(game);
 
     }
+	/**
+	 * This method is used to load the progress of the game
+	 */
 
-    public void loadProgress(){
+    public void loadProgress() {
 
 
     }
+	/**
+	 * This method is used to exit the Game Scene
+	 * 
+	 * @param in
+	 *            The actionEvent ActionEvent.
+	 */
+    public void exit(ActionEvent event) {
 
-    public void exit(ActionEvent event){
-
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         stage.close();
 
     }
-
+	/**
+	 * This method is to set the Main
+	 * 
+	 * @param in
+	 *            Main main
+	 */
     public void setMain(Main main) {
         this.main = main;
     }

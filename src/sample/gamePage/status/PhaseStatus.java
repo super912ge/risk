@@ -1,4 +1,5 @@
 package sample.gamePage.status;
+
 import javafx.scene.layout.AnchorPane;
 import sample.gamePage.GamePage;
 
@@ -13,14 +14,14 @@ public abstract class PhaseStatus {
 
     public abstract void init();
 
-    public void setGamePage(GamePage gp){
-
-        gamePage = gp;
-    }
-
-    protected GamePage getGamePage(){
+    protected GamePage getGamePage() {
 
         return gamePage;
+    }
+
+    public void setGamePage(GamePage gp) {
+
+        gamePage = gp;
     }
 
 }

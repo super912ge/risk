@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.gamePage.status.phaseThree.PhaseThree"
-            prefHeight="485.0" prefWidth="340.0" layoutY="95.0">
-
+<AnchorPane fx:id="pane" layoutY="95.0" prefHeight="485.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.gamePage.status.phaseThree.PhaseThree">
+    <children>
+        <Label layoutX="53.0" layoutY="13.0" prefHeight="24.0" prefWidth="61.0" text="Stage:" />
+        <Text fx:id="stage" layoutX="126.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="86.7294921875" />
+        <TextFlow fx:id="territory" layoutX="41.0" layoutY="56.0" prefHeight="202.0" prefWidth="265.0" />
+      <Button layoutX="144.0" layoutY="339.0" mnemonicParsing="false" onAction="#skip" text="Skip" />
+    </children>
 </AnchorPane>
