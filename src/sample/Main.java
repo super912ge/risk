@@ -18,13 +18,16 @@ public class Main extends Application {
 
 	private GamePage gamePageController;
 
-    /**
-	   * Launch the application.
-	   */
+   /**
+	* Launch the application.
+	*/
     public static void main(String[] args) {
         launch(args);
     }
 
+    /**
+     * Initialize and show the window.
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -34,6 +37,9 @@ public class Main extends Application {
 
     }
 
+    /**
+     * Defines details of the main window.
+     */
     private void mainWindow() {
 
         try {
@@ -83,6 +89,10 @@ public class Main extends Application {
     }
 
 
+    /**
+     * Get the controller bind to the game page.
+     * @return
+     */
     public GamePage getGamePageController() {
         return gamePageController;
     }

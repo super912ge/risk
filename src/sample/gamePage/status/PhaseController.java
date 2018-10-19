@@ -9,10 +9,8 @@ import sample.gamePage.status.preGame.PreGame;
 
 import java.io.IOException;
 
-/*
-
- Switch between different game phase by loading different fxml file and return the controller.
-
+/**
+ * Switch between different game phase by loading different fxml file and return the controller.
  */
 public class PhaseController {
 

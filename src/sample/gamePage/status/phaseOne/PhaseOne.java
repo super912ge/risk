@@ -68,9 +68,9 @@ public class PhaseOne extends PhaseStatus {
 
 
     /**
-	   * To update phrase one game which includes current player, territory,continent
+	 * To update phrase one game which includes current player, territory,continent
      * stages,and gained army number 
-	   */
+     */
     @Override
     public void update() {
 
@@ -94,6 +94,9 @@ public class PhaseOne extends PhaseStatus {
         }
     }
 
+    /**
+     * Set content of the panel.
+     */
     private void setContent() {
 
         List<Text> textList = new ArrayList<>();

@@ -195,17 +195,30 @@ public class Player {
         this.cards = cards;
     }
 
+    /**
+     * get the spent army.
+     * @return the number of army spent.
+     */
     public int getSpentArmy() {
 
         return spentArmy;
     }
 
+    /**
+     * Set the number of armies spent/
+     * @param spentArmy is the number of armies spent.
+     */
     public void setSpentArmy(int spentArmy) {
 
         this.spentArmy = spentArmy;
     }
 
 
+    /**
+     * Add a territory.
+     * @param country is the country to be added.
+     * @param armyAssigned assign armies to the country.
+     */
     public void addTerritory(Country country, int armyAssigned) {
 
         country.setPlayer(this);
@@ -220,6 +233,9 @@ public class Player {
 
     }
 
+    /**
+     * update the continent.
+     */
     private void updateContinent() {
 
         for (Continent c : GameMap.getInstance().getContinents()) {
@@ -232,6 +248,10 @@ public class Player {
         }
     }
 
+    /**
+     * Show the information of the player.
+     * @return the information of the player.
+     */
     public String playerInfo() {
 
         return "Player: " + id + " " + username + " Available Army : " + (army - spentArmy);
