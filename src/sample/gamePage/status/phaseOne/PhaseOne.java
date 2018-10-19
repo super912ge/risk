@@ -8,11 +8,16 @@ import sample.GameStatus;
 import sample.gamePage.status.PhaseStatus;
 import sample.model.Country;
 import sample.model.Player;
-import sample.utils.GameUtil;
 
+
+import sample.utils.GameUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents the first phase of the game
+ * It updates current status
+ */
 public class PhaseOne extends PhaseStatus {
 
     @FXML
@@ -30,12 +35,19 @@ public class PhaseOne extends PhaseStatus {
     @FXML
     private Text log;
 
+  
     private Player currentPlayer;
 
+   /**
+	  * @override function
+    * This method is to get current pane
+    * @return pane
+	  */
     @Override
     public AnchorPane getPane() {
         return pane;
     }
+
 
 
     @Override
@@ -55,6 +67,10 @@ public class PhaseOne extends PhaseStatus {
     }
 
 
+    /**
+	   * To update phrase one game which includes current player, territory,continent
+     * stages,and gained army number 
+	   */
     @Override
     public void update() {
 
