@@ -15,6 +15,11 @@ import sample.utils.GameUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class defines the scenes and information showed prior to a game.
+ *
+ */
+
 public class PreGame extends PhaseStatus {
 
     @FXML
@@ -32,6 +37,9 @@ public class PreGame extends PhaseStatus {
     private Button confirm;
 
 
+    /**
+     * initialize all class variables
+     */
     public void init() {
 
         player = GameStatus.getInstance().getCurrentPlayer();
@@ -43,11 +51,17 @@ public class PreGame extends PhaseStatus {
         setContent();
     }
 
+    /**
+     * Get the panel
+     */
     public AnchorPane getPane() {
 
         return pane;
     }
 
+   /**
+    * Set information of a player and update.
+    */
     public void confirm() {
 
         player.setUsername(input.getText().trim());
@@ -73,6 +87,9 @@ public class PreGame extends PhaseStatus {
 
     }
 
+    /**
+     * Reset the information of current page.
+     */
     public void reset() {
 
         GameUtil.initTempMap(player);
@@ -84,6 +101,9 @@ public class PreGame extends PhaseStatus {
         update();
     }
 
+    /**
+     * update the current information.
+     */
     public void update() {
 
         player = GameStatus.getInstance().getCurrentPlayer();
@@ -93,6 +113,9 @@ public class PreGame extends PhaseStatus {
         setContent();
     }
 
+    /**
+     * Set content for the current page.
+     */
     private void setContent() {
 
         List<Text> textList = new ArrayList<>();

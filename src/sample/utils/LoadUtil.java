@@ -394,6 +394,9 @@ public class LoadUtil {
 		}
 	}
 
+	/**
+	 * Validate the map is a connected graph.
+	 */
 	private static void validateConnected  ()  { //You can run DFS on any arbitrary node
 
 		Set<Country> countries = new HashSet<> ();
@@ -409,6 +412,11 @@ public class LoadUtil {
 
 	}
 
+	/**
+	 * Run the DFS algorithm for map
+	 * @param c is the start country.
+	 * @param countries is the set of countries.
+	 */
 	private static void dfs (Country c, Set<Country> countries)
 	{
 		countries.add (c) ;

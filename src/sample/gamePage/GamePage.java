@@ -29,7 +29,10 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-
+/**
+ * Defines details in the game page including map display area and other panels with 
+ * game and player information.
+ */
 public class GamePage {
 
     @FXML
@@ -57,14 +60,25 @@ public class GamePage {
 
     private GameMap map = GameMap.getInstance();
 
+    /**
+     * Constructor
+     * @throws IOException if encounters exception
+     */
     public GamePage() throws IOException {
     }
 
+    /**
+     * Set the front page with the given scene
+     * @param scene is the scene to be set as the front page.
+     */
     public void setFrontPage(Scene scene) {
 
         this.frontPage = scene;
     }
 
+    /**
+     * The method which shows the main menu.
+     */
     public void goToMainMenu() {
 
         Stage stage = (Stage) this.gameMapPane.getScene().getWindow();
@@ -78,6 +92,9 @@ public class GamePage {
 	    LoadUtil.saveFile ("save/");
     }
 
+    /**
+     * Update information of players.
+     */
     public void updatePlayer() {
 
         Player player = GameStatus.getInstance().getCurrentPlayer();
@@ -85,6 +102,10 @@ public class GamePage {
         playerInfo.setText(player.playerInfo());
     }
 
+    /**
+     * render map with given map details.
+     * @throws IOException if encounter IO exception.
+     */
     public void renderMap() throws IOException {
 
 	    BufferedImage readImage ;
@@ -198,6 +219,9 @@ public class GamePage {
         }
     }
 
+    /**
+     * Update status of phase.
+     */
     public void updatePhaseStatus() {
 
         phaseStatus = phaseController.getPhase();
@@ -210,6 +234,9 @@ public class GamePage {
 
     }
 
+    /**
+     * Update phase information of the current player.
+     */
     public void playerPhase() {
 
         phaseStatus.update();
