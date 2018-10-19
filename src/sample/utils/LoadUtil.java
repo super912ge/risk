@@ -269,14 +269,28 @@ public class LoadUtil {
 			}
 		});
 
-		LoadUtil.validateContinent ();
 
-		LoadUtil.validateCountry ();
 
-		map.setContinents (LoadUtil.getAllContinents ());
+		try {
+			LoadUtil.validateConnected ();
 
-		map.setTerritories (LoadUtil.getAllCountry ());
+			LoadUtil.validateContinent ();
 
+			LoadUtil.validateCountry ();
+
+			map.setContinents (LoadUtil.getAllContinents ());
+
+			map.setTerritories (LoadUtil.getAllCountry ());
+
+
+		} catch (Exception e) {
+
+			Alert alert = new Alert (Alert.AlertType.ERROR);
+
+			alert.setContentText (e.getMessage ());
+
+			alert.show ();
+		}
 	}
 
 	/**
@@ -373,5 +387,29 @@ public class LoadUtil {
 			e.printStackTrace ();
 
 		}
+	}
+
+	private static void validateConnected  () throws Exception { //You can run DFS on any arbitrary node
+
+		Set<Country> countries = new HashSet<> ();
+
+		Country country = countryMap.values ().stream ().findAny ().orElse (null);
+
+		dfs (country,countries);
+
+		for( Country c: countryMap.values ()){
+
+			if (!countries.contains (c)) throw new Exception (c.getName ()+" is not connected.");
+		}
+
+	}
+
+	private static void dfs (Country c, Set<Country> countries)
+	{
+		countries.add (c) ;
+
+		for(Country adj: c.getAdjacentCountry ())
+
+			if(!countries.contains (adj)) dfs(adj,countries);
 	}
 }
