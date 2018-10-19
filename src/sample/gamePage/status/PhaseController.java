@@ -25,7 +25,11 @@ public class PhaseController {
 
     private PhaseThree phaseThree;
 
-
+/**
+	 * This is a constructor of PhaseController
+	 * 
+	 * @throws IOException
+	 */
     public PhaseController() throws IOException {
 
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("./preGame/PreGame.fxml"));
@@ -52,7 +56,12 @@ public class PhaseController {
 
         phaseThree = loader.getController();
     }
-
+/**
+	 * This method is getPhase 
+	 * 
+	 * @return 
+	 *            The PhaseStatus
+	 */
 
     public PhaseStatus getPhase() {
 
