@@ -97,7 +97,7 @@ public class GamePage {
 
 		     int w = readImage.getWidth();
 
-		     map.setCoordinator (new Coordinator (w,h));
+		     map.setCoordinator (new Coordinator (w, h));
 
 	    } catch (Exception e) {
 

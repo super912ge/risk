@@ -72,5 +72,6 @@ public class PhaseThree extends PhaseStatus {
     	super.getGamePage ().updatePlayer ();
 
     	super.getGamePage().updatePhaseStatus ();
+
     }
 }

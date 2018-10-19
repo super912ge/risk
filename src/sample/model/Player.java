@@ -153,6 +153,7 @@ public class Player {
      */
     public void gainArmy() {
 
+    	this.spentArmy = 0;
         int gainedArmy = Math.max(getTerritory().size() / 3, 3);
 
         if (getContinents() != null && !getContinents().isEmpty()) {
