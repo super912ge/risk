@@ -4,6 +4,7 @@ import sample.model.Country;
 import sample.model.Player;
 
 import java.util.*;
+
 /**
  * GameUtil class Distribute Army
  */
@@ -34,7 +35,6 @@ public class GameUtil {
         });
 
         return sortedArrayList;
-
     }
    /**
      * getFinalCountry

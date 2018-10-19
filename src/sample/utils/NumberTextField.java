@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
+
 /**
  * NumberTextField class is to show the changed number
  */
@@ -20,6 +21,7 @@ public class NumberTextField extends TextField {
 
     private ObjectProperty<Integer> number = new SimpleObjectProperty<>();
 
+
     public NumberTextField() {
 
         this(0);
@@ -31,7 +33,7 @@ public class NumberTextField extends TextField {
     private NumberTextField(Integer value) {
 
         this(value, NumberFormat.getInstance());
-
+      
         initHandlers();
     }
      /**
@@ -63,8 +65,7 @@ public class NumberTextField extends TextField {
      * param value set new value with type integer
      */
     public final void setNumber(Integer value) {
-
-
+      
         number.set(value);
     }
     /**
