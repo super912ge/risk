@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ *It is a class to describe all functions related to PhaseThree
  */
 public class PhaseThree extends PhaseStatus {
 
@@ -28,17 +28,28 @@ public class PhaseThree extends PhaseStatus {
 
     @FXML
     private Text stage;
-
+    /**
+	 * This method is to getPane and return it
+	 * 
+	 * @return pane
+	 */
     @Override
     public AnchorPane getPane() {
         return pane;
     }
-
+    /**
+	 * This method is update 
+	 * 
+	 * @Override
+	 */
     @Override
     public void update() {
 
     }
-
+    /**
+	 * This method is for init.
+	 * @override
+	 */
     @Override
     public void init() {
 
@@ -48,7 +59,10 @@ public class PhaseThree extends PhaseStatus {
 
         setContent();
     }
-
+    /**
+	 * This method is set content of phase three
+	 * 
+	 */
     private void setContent() {
 
         List<Text> textList = new ArrayList<>();
@@ -64,7 +78,10 @@ public class PhaseThree extends PhaseStatus {
 
         territory.getChildren().addAll(textList);
     }
-
+    /**
+	 * This method is skip
+	 *
+	 */
     public void skip(){
 
     	GameStatus.getInstance ().nextPhase ();
