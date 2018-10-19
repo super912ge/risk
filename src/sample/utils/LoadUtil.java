@@ -1,5 +1,6 @@
 package sample.utils;
 
+import javafx.scene.control.Alert;
 import sample.model.Continent;
 import sample.model.Coordinator;
 import sample.model.Country;
@@ -22,10 +23,6 @@ public class LoadUtil {
 	private static HashMap<String, Continent> continentMap = new HashMap<> ();
 
 	private static HashMap<String, Country> countryMap = new HashMap<> ();
-
-	private static int w = 0;
-
-	private static int h = 0;
 
 	/**
 	 * Method to get the Continent according to the name
@@ -157,9 +154,22 @@ public class LoadUtil {
 								map.setScroll (split[1]);
 								break;
 
-							case "image":
-								map.setImage (new File (split[1]));
+							case "image": {
+
+								String image = file.getPath ().substring (0,file.getPath ().lastIndexOf ('/')+1)+ split[1];
+
+								map.setImage (new File (image));
+
+								if (!map.getImage ().exists ()){
+
+									Alert alert = new Alert (Alert.AlertType.ERROR);
+
+									alert.setContentText (image +" doesn't exit!");
+
+									alert.show ();
+								}
 								break;
+							}
 
 							case "wrap":
 								map.setWrap (split[1].trim ().toLowerCase ().equals ("yes"));
@@ -215,10 +225,6 @@ public class LoadUtil {
 
 							} else country = new Country (str[0], new Coordinator (x, y));
 
-							w = Math.max (w, x);
-
-							h = Math.max (h, y);
-
 							String continentName = str[3];
 
 							Continent continent = LoadUtil.getContinent (continentName);
@@ -271,7 +277,6 @@ public class LoadUtil {
 
 		map.setTerritories (LoadUtil.getAllCountry ());
 
-		map.setCoordinator (new Coordinator (w, h));
 	}
 
 	/**
@@ -279,13 +284,9 @@ public class LoadUtil {
 	 *
 	 * @param PathOut is the file to be save.
 	 *
-	 * @return boolean true means successfully saved, false means save failed.
-	 *
 	 * @throws IOException if encounters IO error.
 	 */
-	public static boolean saveFile (String PathOut) throws IOException {
-
-		boolean bState ;
+	public static void saveFile (String PathOut) throws IOException {
 
 		GameMap map = GameMap.getInstance ();
 
@@ -367,14 +368,10 @@ public class LoadUtil {
 
 			}
 
-			bState = true;
-
 		} catch (IOException e) {
 
 			e.printStackTrace ();
 
-			bState = false;
 		}
-		return bState;
 	}
 }

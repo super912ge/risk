@@ -12,9 +12,7 @@ public class Main extends Application {
 
     private Stage stage;
 
-    private FrontPageController frontPageController;
-
-    private GamePage gamePageController;
+	private GamePage gamePageController;
 
     public static void main(String[] args) {
         launch(args);
@@ -57,7 +55,7 @@ public class Main extends Application {
 
             gamePagePane.getStylesheets().addAll(stylesheet);
 
-            frontPageController = frontPageLoader.getController();
+	        FrontPageController frontPageController = frontPageLoader.getController ();
 
             frontPageController.setMain(this);
 

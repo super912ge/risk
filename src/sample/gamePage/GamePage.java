@@ -4,12 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -20,12 +19,14 @@ import sample.GameStatus;
 import sample.gamePage.status.PhaseController;
 import sample.gamePage.status.PhaseStatus;
 import sample.gamePage.status.countryStatus.CountryStatus;
+import sample.model.Coordinator;
 import sample.model.Country;
 import sample.model.GameMap;
 import sample.model.Player;
 import sample.utils.ColorUtil;
 import sample.utils.LoadUtil;
-
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 
@@ -86,7 +87,28 @@ public class GamePage {
 
     public void renderMap() throws IOException {
 
-        int width = map.getCoordinator().getX();
+	    BufferedImage readImage ;
+
+	    try {
+
+	    	readImage = ImageIO.read(GameMap.getInstance ().getImage ());
+
+		     int h = readImage.getHeight();
+
+		     int w = readImage.getWidth();
+
+		     map.setCoordinator (new Coordinator (w,h));
+
+	    } catch (Exception e) {
+
+	    	Alert alert = new Alert (Alert.AlertType.ERROR);
+
+	    	alert.setContentText (e.getMessage ());
+
+		    alert.show ();
+	    }
+
+        int width = map.getCoordinator ().getX();
 
         int height = map.getCoordinator().getY();
 
@@ -127,7 +149,12 @@ public class GamePage {
                         countryStatus.setGamePage(this);
 
                     } catch (IOException e) {
-                        e.printStackTrace();
+
+                    	Alert alert = new Alert (Alert.AlertType.ERROR);
+
+                    	alert.setTitle (e.getMessage ());
+
+                    	alert.show ();
                     }
                 }
 
@@ -153,13 +180,19 @@ public class GamePage {
                 }
             });
 
-            double x = ((double) country.getCoordinator().getX() / width) * gameMap.getFitWidth() * 0.68;
+	        Image image = new Image (map.getImage ().toURI ().toURL ().toExternalForm ());
 
-            double y = ((double) country.getCoordinator().getY() / height) * gameMap.getFitHeight() * 0.8;
+	        gameMap.setImage (image);
 
-            AnchorPane.setLeftAnchor(button, x + 125);
+	        gameMap.setFitWidth ((map.getCoordinator ().getX ()*gameMap.getFitHeight ()/map.getCoordinator ().getY ()));
 
-            AnchorPane.setTopAnchor(button, y + 40);
+            double x = ((double) country.getCoordinator().getX() / width) * gameMap.getFitWidth() ;
+
+            double y = ((double) country.getCoordinator().getY() / height) * gameMap.getFitHeight();
+
+            AnchorPane.setLeftAnchor(button, x );
+
+            AnchorPane.setTopAnchor(button, y );
 
             gameMapPane.getChildren().add(button);
         }
