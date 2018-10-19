@@ -25,6 +25,11 @@ public class PhaseController {
 
     private PhaseThree phaseThree;
 
+ /**
+	 * It is a constructor of Phase Controller
+	 * 
+	 * @throws IOException
+	 */
 
     public PhaseController() throws IOException {
 
@@ -53,7 +58,10 @@ public class PhaseController {
         phaseThree = loader.getController();
     }
 
-
+ /**
+	 * This method is used to get Phase Status
+	 * @return the status of Phase
+	 */
     public PhaseStatus getPhase() {
 
         if (!GameStatus.getInstance().isStart()) {
