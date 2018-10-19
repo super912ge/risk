@@ -64,4 +64,13 @@ public class PhaseThree extends PhaseStatus {
 
         territory.getChildren().addAll(textList);
     }
+
+    public void skip(){
+
+    	GameStatus.getInstance ().nextPhase ();
+
+    	super.getGamePage ().updatePlayer ();
+
+    	super.getGamePage().updatePhaseStatus ();
+    }
 }
