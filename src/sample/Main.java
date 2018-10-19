@@ -8,12 +8,19 @@ import javafx.stage.Stage;
 import sample.frontPage.FrontPageController;
 import sample.gamePage.GamePage;
 
+/**
+ * The main entrance of the application
+ *
+ */
 public class Main extends Application {
 
     private Stage stage;
 
 	private GamePage gamePageController;
 
+    /**
+	   * Launch the application.
+	   */
     public static void main(String[] args) {
         launch(args);
     }
@@ -55,7 +62,7 @@ public class Main extends Application {
 
             gamePagePane.getStylesheets().addAll(stylesheet);
 
-	        FrontPageController frontPageController = frontPageLoader.getController ();
+	          FrontPageController frontPageController = frontPageLoader.getController ();
 
             frontPageController.setMain(this);
 
@@ -79,5 +86,5 @@ public class Main extends Application {
     public GamePage getGamePageController() {
         return gamePageController;
     }
-
+  
 }
