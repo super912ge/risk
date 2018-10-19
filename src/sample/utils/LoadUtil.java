@@ -86,12 +86,15 @@ public class LoadUtil {
 
 	private static void validateContinent () {
 
+		if (continentMap.isEmpty ()) throw new IllegalArgumentException ("No continent in the map file");
 	}
 
 	/**
 	 * Method to validate every country and their adjacent countries.
 	 */
 	private static void validateCountry () {
+
+		if (countryMap.isEmpty ()) throw new IllegalArgumentException ("No territory in the map file.");
 
 		Country country = countryMap.values ().stream ().filter (i -> i.getCoordinator () == null)
 				.findAny ().orElse (null);
@@ -258,7 +261,11 @@ public class LoadUtil {
 
 						} catch (Exception e) {
 
-							e.printStackTrace ();
+							Alert alert = new Alert (Alert.AlertType.ERROR);
+
+							alert.setContentText (e.getMessage ());
+
+							alert.show ();
 						}
 
 						break;
@@ -268,8 +275,6 @@ public class LoadUtil {
 				}
 			}
 		});
-
-
 
 		try {
 			LoadUtil.validateConnected ();
@@ -389,7 +394,7 @@ public class LoadUtil {
 		}
 	}
 
-	private static void validateConnected  () throws Exception { //You can run DFS on any arbitrary node
+	private static void validateConnected  ()  { //You can run DFS on any arbitrary node
 
 		Set<Country> countries = new HashSet<> ();
 
@@ -399,7 +404,7 @@ public class LoadUtil {
 
 		for( Country c: countryMap.values ()){
 
-			if (!countries.contains (c)) throw new Exception (c.getName ()+" is not connected.");
+			if (!countries.contains (c)) throw new IllegalArgumentException (c.getName ()+" is not connected.");
 		}
 
 	}
