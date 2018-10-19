@@ -159,15 +159,15 @@ public class LoadUtil {
 
 							case "image": {
 
-								String image = file.getPath ().substring (0,file.getPath ().lastIndexOf ('/')+1)+ split[1];
-
+								String image = new File(file.getParent(), split[1]).getPath();
+								
 								map.setImage (new File (image));
 
 								if (!map.getImage ().exists ()){
 
 									Alert alert = new Alert (Alert.AlertType.ERROR);
 
-									alert.setContentText (image +" doesn't exit!");
+									alert.setContentText (image +" doesn't exist!");
 
 									alert.show ();
 								}
