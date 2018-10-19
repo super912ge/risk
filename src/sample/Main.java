@@ -6,20 +6,20 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import sample.frontPage.FrontPageController;
-import sample.gamePage.GamePageController;
+import sample.gamePage.GamePage;
 
 public class Main extends Application {
 
     private Stage stage;
 
+	private GamePage gamePageController;
 
-
-    private FrontPageController frontPageController;
-
-    private GamePageController gamePageController;
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
 
         this.stage = primaryStage;
 
@@ -27,9 +27,9 @@ public class Main extends Application {
 
     }
 
-    private void mainWindow(){
+    private void mainWindow() {
 
-        try{
+        try {
 
             stage.setResizable(true);
 
@@ -55,7 +55,7 @@ public class Main extends Application {
 
             gamePagePane.getStylesheets().addAll(stylesheet);
 
-            frontPageController = frontPageLoader.getController();
+	        FrontPageController frontPageController = frontPageLoader.getController ();
 
             frontPageController.setMain(this);
 
@@ -69,29 +69,15 @@ public class Main extends Application {
 
             stage.show();
 
-        }catch (Exception e){
+        } catch (Exception e) {
 
             e.printStackTrace();
         }
     }
 
-    public FrontPageController getFrontPageController() {
-        return frontPageController;
-    }
 
-    public void setFrontPageController(FrontPageController frontPageController) {
-        this.frontPageController = frontPageController;
-    }
-
-    public GamePageController getGamePageController() {
+    public GamePage getGamePageController() {
         return gamePageController;
     }
 
-    public void setGamePageController(GamePageController gamePageController) {
-        this.gamePageController = gamePageController;
-    }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
 }

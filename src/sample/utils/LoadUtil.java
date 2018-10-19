@@ -1,221 +1,420 @@
 package sample.utils;
 
+import javafx.scene.control.Alert;
 import sample.model.Continent;
 import sample.model.Coordinator;
 import sample.model.Country;
 import sample.model.GameMap;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+
+import java.io.*;
 import java.util.*;
 import java.util.stream.Stream;
 
+/**
+ * LoadUtil class manages the reading and writing map information from or to a .map file.
+ * It also provides a format checking when reading a .map file to ensure the information can
+ * be correctly loaded into the map editor.
+ */
+
 public class LoadUtil {
-    
-    private static String label = "";
 
-    private static HashMap<String,Continent> continentMap = new HashMap<>();
+	private static String label = "";
 
-    private static HashMap<String,Country> countryMap = new HashMap<>();
+	private static HashMap<String, Continent> continentMap = new HashMap<> ();
 
-    private static int w = 0;
+	private static HashMap<String, Country> countryMap = new HashMap<> ();
 
-    private static int h =0 ;
+	/**
+	 * Method to get the Continent according to the name
+	 *
+	 * @param name name is the continent we want to get
+	 *
+	 * @return continent
+	 */
+	private static Continent getContinent (String name) {
 
-    private static Continent getContinent(String name){
+		return continentMap.get (name);
+	}
 
-       return continentMap.get(name);
-    }
+	/**
+	 * Method to get the Continents
+	 *
+	 * @return ArrayList an list of continentMap.
+	 */
+	private static List<Continent> getAllContinents () {
 
-    private static List<Continent> getAllContinents(){
+		return new ArrayList<> (continentMap.values ());
+	}
 
-        return new ArrayList<>(continentMap.values());
-    }
+	/**
+	 * Method to add a new Continent to the continentMap
+	 *
+	 * @param continent a new continent we want to add
+	 */
+	private static void addContinent (Continent continent) {
 
-    private static void addContinent(Continent continent){
+		continentMap.put (continent.getName (), continent);
+	}
 
-        continentMap.put(continent.getName(),continent);
-    }
+	/**
+	 * Method to get the all the Country
+	 *
+	 * @return ArrayList an list of countryMap.
+	 */
+	private static List<Country> getAllCountry () {
 
-    private static List<Country> getAllCountry(){
+		return new ArrayList<> (countryMap.values ());
+	}
 
-        return new ArrayList<>( countryMap.values());
-    }
+	/**
+	 * Method to get the Country according to the name
+	 *
+	 * @return list an instance of Country.
+	 */
+	private static Country getCountry (String name) {
 
-    private static Country getCountry(String name){
+		return countryMap.get (name);
+	}
 
-        return countryMap.get(name);
-    }
+	/**
+	 * Method to add a new country to the continentMap
+	 */
+	private static void addCountry (Country country) {
 
-    private static void addCountry(Country country){
+		countryMap.put (country.getName (), country);
+	}
 
-        countryMap.put(country.getName(),country);
-    }
+	private static void validateContinent () {
 
-    private static void validateContinent(){
+		if (continentMap.isEmpty ()) throw new IllegalArgumentException ("No continent in the map file");
+	}
 
-    }
+	/**
+	 * Method to validate every country and their adjacent countries.
+	 */
+	private static void validateCountry () {
 
-    private static void validateCountry(){
+		if (countryMap.isEmpty ()) throw new IllegalArgumentException ("No territory in the map file.");
 
-        Country country = countryMap.values().stream().filter(i-> i.getCoordinator()==null)
-                .findAny().orElse(null);
+		Country country = countryMap.values ().stream ().filter (i -> i.getCoordinator () == null)
+				.findAny ().orElse (null);
 
-        if (country!=null) throw new IllegalArgumentException("Illegal adjacent country: "+country.getName());
+		if (country != null) throw new IllegalArgumentException ("Illegal adjacent country: " + country.getName ());
 
-        countryMap.values().forEach(c->{
+		countryMap.values ().forEach (c -> {
 
-            List<Country> adjacent = c.getAdjacentCountry();
+			Set<Country> adjacent = c.getAdjacentCountry ();
 
-            adjacent.forEach(a-> { if(!a.getAdjacentCountry().contains(c))
+			adjacent.forEach (a -> {
+				if (! a.getAdjacentCountry ().contains (c))
 
-                    throw new IllegalArgumentException("Illegal adjacent country "+c.getName()+" and "+ a.getName());
-            });
-        });
-    }
+					throw new IllegalArgumentException ("Illegal adjacent country " + c.getName () + " and " + a.getName ());
+			});
+		});
+	}
 
-    public static void readFile(File file) throws IOException {
+	/**
+	 * Method to read a .map file and store all information to an instance of RiskMap and check
+	 * correctness of every information.
+	 *
+	 * @param file is the file to be read.
+	 *
+	 * @throws IOException if encounters IO error.
+	 */
+	public static void readFile (File file) throws IOException {
 
-        GameMap map = GameMap.getInstance();
+		GameMap map = GameMap.getInstance ();
 
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+		BufferedReader bufferedReader = new BufferedReader (new FileReader (file));
 
-        Stream<String> mapFile = bufferedReader.lines();
+		Stream<String> mapFile = bufferedReader.lines ();
 
-        mapFile = mapFile.filter(l->!"".equals(l.trim()));
+		mapFile = mapFile.filter (l -> ! "".equals (l.trim ()));
 
-        mapFile.forEach(s-> {
+		mapFile.forEach (s -> {
 
-            s = s.trim();
+			s = s.trim ();
 
-            if (s.equals("[Map]") || s.equals("[Territories]") || s.equals("[Continents]")) {
+			if (s.equals ("[Map]") || s.equals ("[Territories]") || s.equals ("[Continents]")) {
 
-                label = s;
+				label = s;
 
-            }else {
+			} else {
 
-                switch (label.toLowerCase()) {
+				switch (label.toLowerCase ()) {
 
-                    case "[map]": {
+					case "[map]": {
 
-                        String [] split = s.split("=");
+						String[] split = s.split ("=");
 
-                        switch (split[0].trim()){
+						switch (split[0].trim ()) {
 
-                            case "author": map.setAuthor(split[1]); break;
+							case "author":
+								map.setAuthor (split[1]);
+								break;
 
-                            case "scroll": map.setScroll(split[1]); break;
+							case "scroll":
+								map.setScroll (split[1]);
+								break;
 
-                            case "image": map.setImage(new File(split[1])); break;
+							case "image": {
 
-                            case "wrap": map.setWrap(split[1].trim().toLowerCase().equals("yes"));break;
+								String image = file.getPath ().substring (0,file.getPath ().lastIndexOf ('/')+1)+ split[1];
 
-                            case "warn": map.setWarn(split[1].trim().toLowerCase().equals("yes")); break;
+								map.setImage (new File (image));
 
-                            default: break;
-                        }
+								if (!map.getImage ().exists ()){
 
-                        break;
+									Alert alert = new Alert (Alert.AlertType.ERROR);
 
-                    }
+									alert.setContentText (image +" doesn't exit!");
 
-                    case "[continents]":{
+									alert.show ();
+								}
+								break;
+							}
 
-                        String[] str = s.split("=");
+							case "wrap":
+								map.setWrap (split[1].trim ().toLowerCase ().equals ("yes"));
+								break;
 
-                        try {
+							case "warn":
+								map.setWarn (split[1].trim ().toLowerCase ().equals ("yes"));
+								break;
 
-                            Continent continent = new Continent(str[0], Integer.parseInt(str[1]));
+							default:
+								break;
+						}
 
-                            LoadUtil.addContinent(continent);
+						break;
 
+					}
 
-                        }catch (Exception e){
+					case "[continents]": {
 
-                            e.printStackTrace();
-                        }
+						String[] str = s.split ("=");
 
-                        break;
-                    }
+						try {
 
-                    case "[territories]":{
+							Continent continent = new Continent (str[0], Integer.parseInt (str[1]));
 
-                        String[] str = s.split(",");
+							LoadUtil.addContinent (continent);
 
+						} catch (Exception e) {
 
-                        try {
+							e.printStackTrace ();
+						}
 
-                            int x = Integer.parseInt(str[1]);
+						break;
+					}
 
-                            int y = Integer.parseInt(str[2]);
+					case "[territories]": {
 
-                            Country country;
+						String[] str = s.split (",");
 
-                            if (LoadUtil.getCountry(str[0]) != null) {
+						try {
 
-                                country = LoadUtil.getCountry(str[0]);
+							int x = Integer.parseInt (str[1]);
 
-                                country.setCoordinator(new Coordinator(x,y));
+							int y = Integer.parseInt (str[2]);
 
-                            } else country = new Country(str[0], new Coordinator(x,y));
+							Country country;
 
-                            w = Math.max(w,x);
+							if (LoadUtil.getCountry (str[0]) != null) {
 
-                            h = Math.max(h,y);
+								country = LoadUtil.getCountry (str[0]);
 
-                            String continentName = str[3];
+								country.setCoordinator (new Coordinator (x, y));
 
-                            Continent continent = LoadUtil.getContinent(continentName);
+							} else country = new Country (str[0], new Coordinator (x, y));
 
-                            if (continent == null) throw new IllegalArgumentException("Continent is invalid for: " + s);
+							String continentName = str[3];
 
-                            continent.getCountries().add(country);
+							Continent continent = LoadUtil.getContinent (continentName);
 
-                            country.setContinent(continent);
+							if (continent == null)
+								throw new IllegalArgumentException ("Continent is invalid for: " + s);
 
-                            LoadUtil.addContinent(continent);
+							continent.getCountries ().add (country);
 
-                            for (int i = 4; i < str.length; i++) {
+							country.setContinent (continent);
 
-                                Country adjacent = LoadUtil.getCountry(str[i]);
+							LoadUtil.addContinent (continent);
 
-                                if (adjacent != null) {
+							for (int i = 4; i < str.length; i++) {
 
-                                    country.getAdjacentCountry().add(adjacent);
+								Country adjacent = LoadUtil.getCountry (str[i]);
 
-                                } else {
+								if (adjacent != null) {
 
-                                    LoadUtil.addCountry(new Country(str[i]));
+									country.getAdjacentCountry ().add (adjacent);
 
-                                    country.getAdjacentCountry().add(LoadUtil.getCountry(str[i]));
-                                }
-                            }
+								} else {
 
-                            LoadUtil.addCountry(country);
+									LoadUtil.addCountry (new Country (str[i]));
 
-                        }catch (Exception e){
+									country.getAdjacentCountry ().add (LoadUtil.getCountry (str[i]));
+								}
+							}
 
-                            e.printStackTrace();
-                        }
+							LoadUtil.addCountry (country);
 
-                        break;
-                    }
+						} catch (Exception e) {
 
-                    default: break;
-                }
-            }
-        });
+							Alert alert = new Alert (Alert.AlertType.ERROR);
 
-        LoadUtil.validateContinent();
+							alert.setContentText (e.getMessage ());
 
-        LoadUtil.validateCountry();
+							alert.show ();
+						}
 
-        map.setContinents(LoadUtil.getAllContinents());
+						break;
+					}
 
-        map.setTerritories(LoadUtil.getAllCountry());
+					default: break;
+				}
+			}
+		});
 
-        map.setCoordinator(new Coordinator(w,h));
-    }
+		try {
+			LoadUtil.validateConnected ();
 
+			LoadUtil.validateContinent ();
+
+			LoadUtil.validateCountry ();
+
+			map.setContinents (LoadUtil.getAllContinents ());
+
+			map.setTerritories (LoadUtil.getAllCountry ());
+
+
+		} catch (Exception e) {
+
+			Alert alert = new Alert (Alert.AlertType.ERROR);
+
+			alert.setContentText (e.getMessage ());
+
+			alert.show ();
+		}
+	}
+
+	/**
+	 * Method to save a .map file
+	 *
+	 * @param PathOut is the file to be save.
+	 *
+	 * @throws IOException if encounters IO error.
+	 */
+	public static void saveFile (String PathOut) throws IOException {
+
+		GameMap map = GameMap.getInstance ();
+
+		FileWriter fw;
+
+		BufferedWriter bufw;
+		try {
+
+			fw = new FileWriter (PathOut);
+
+			bufw = new BufferedWriter (fw);
+
+
+			bufw.write ("[Map]" + "\n");
+
+			bufw.write ("author=" + map.getAuthor () + "\n");
+
+			bufw.write ("warn=" + map.getWarn () + "\n");
+
+			bufw.write ("image=" + map.getImage () + "\n");
+
+			bufw.write ("wrap=" + map.getWarn () + "\n");
+
+			bufw.write ("scroll=" + map.getScroll () + "\n");
+
+			bufw.write ("\n");
+
+			List<Continent> continents = map.getContinents ();
+
+			bufw.write ("[continents]" + "\n");
+
+			for (Continent continent : continents) {
+
+				bufw.write (continent.getName () + "=" + continent.getArmy () + "\n");
+
+				bufw.write (continent.getName () + "=" + continent.getArmy () + "\n");
+			}
+
+			bufw.write ("\n");
+
+			bufw.write ("[Territories]" + "\n");
+
+			List<Country> territories = map.getTerritories ();
+
+			LinkedList<String> str = new LinkedList<> ();
+
+			for (Country country : territories) {
+
+				Set<Country> adjacentCountry = country.getAdjacentCountry ();
+
+				StringBuilder strAdjacentCountry = new StringBuilder ();
+
+				for (Country countryAdj : adjacentCountry) {
+
+					strAdjacentCountry.append (",");
+
+					strAdjacentCountry.append (countryAdj.getName ());
+				}
+
+					str.add (country.getName () + "," + country.getCoordinator ().getX () + "," +
+						         country.getCoordinator ().getY () + ","
+						         + country.getContinent ().getName () + strAdjacentCountry);
+			}
+
+			for (Continent continent : continents) {
+
+				String strContinents = continent.getName ();
+
+				for (String aStr : str) {
+
+					if (aStr.contains (strContinents)) {
+
+						bufw.write (aStr + "\n");
+					}
+
+					bufw.flush ();
+				}
+				bufw.write ("\n");
+
+			}
+
+		} catch (IOException e) {
+
+			e.printStackTrace ();
+
+		}
+	}
+
+	private static void validateConnected  ()  { //You can run DFS on any arbitrary node
+
+		Set<Country> countries = new HashSet<> ();
+
+		Country country = countryMap.values ().stream ().findAny ().orElse (null);
+
+		dfs (country,countries);
+
+		for( Country c: countryMap.values ()){
+
+			if (!countries.contains (c)) throw new IllegalArgumentException (c.getName ()+" is not connected.");
+		}
+
+	}
+
+	private static void dfs (Country c, Set<Country> countries)
+	{
+		countries.add (c) ;
+
+		for(Country adj: c.getAdjacentCountry ())
+
+			if(!countries.contains (adj)) dfs(adj,countries);
+	}
 }

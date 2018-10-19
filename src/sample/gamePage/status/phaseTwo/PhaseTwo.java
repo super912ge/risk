@@ -1,17 +1,24 @@
 package sample.gamePage.status.phaseTwo;
 
-import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
-import sample.gamePage.status.StatusPhase;
+import sample.gamePage.status.PhaseStatus;
 
-public class PhaseTwo implements StatusPhase {
-
-    @FXML
-    AnchorPane pane;
+public class PhaseTwo extends PhaseStatus {
 
 
     @Override
     public AnchorPane getPane() {
-        return this.pane;
+        return null;
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void init() {
+
+
     }
 }
